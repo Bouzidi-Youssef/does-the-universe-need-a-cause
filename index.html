@@ -1,0 +1,1182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Does the Universe Need a Cause?</title>
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;1,300;1,400&family=Space+Grotesk:wght@300;400;500&family=Space+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #0c0c0e; --surface: #131317; --surface2: #1a1a21;
+  --border: rgba(255,255,255,0.07); --border2: rgba(255,255,255,0.13);
+  --text: #d8d4cc; --text-muted: #6b6860; --text-dim: #4a4843;
+  --accent: #c9a66b; --accent2: #8b6f3e; --accent-glow: rgba(201,166,107,0.12);
+  --blue: #5b8dd9; --blue-dim: rgba(91,141,217,0.15);
+  --green: #4aab7a; --green-dim: rgba(74,171,122,0.12);
+  --red: #c96b5b; --red-dim: rgba(201,107,91,0.12);
+  --nav-w: 68px; --right-w: 290px;
+}
+html { background: var(--bg); scroll-behavior: smooth; }
+body { font-family: 'Crimson Pro', Georgia, serif; font-size: 19px; line-height: 1.85; color: var(--text); background: var(--bg); margin: 0; min-height: 100vh; }
+
+#sidebar { position: fixed; left: 0; top: 0; bottom: 0; width: var(--nav-w); background: var(--surface); border-right: 1px solid var(--border); display: flex; flex-direction: column; align-items: center; padding: 36px 0; z-index: 100; overflow: hidden; }
+.sidebar-title { writing-mode: vertical-rl; transform: rotate(180deg); font-family: 'Space Grotesk', sans-serif; font-size: 9px; font-weight: 300; letter-spacing: 0.25em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 20px; transition: opacity 0.4s; }
+.chapter-badge { font-family: 'Space Mono', monospace; font-size: 9px; color: var(--text-dim); letter-spacing: 0.05em; margin-bottom: 16px; transition: opacity 0.4s; text-align: center; line-height: 1.4; }
+.nav-chapters { position: relative; flex: 1; width: 100%; display: flex; align-items: center; justify-content: center; }
+.nav-track { position: absolute; display: flex; flex-direction: column; align-items: center; width: 100%; transition: opacity 0.45s, transform 0.45s; }
+.nav-track::before { content: ''; position: absolute; left: 50%; top: 12px; bottom: 12px; width: 1px; background: var(--border2); transform: translateX(-50%); }
+.nav-track.hidden { opacity: 0; pointer-events: none; transform: translateY(16px); }
+.nav-dot { position: relative; z-index: 1; width: 24px; height: 24px; border-radius: 50%; border: 1.5px solid var(--border2); background: var(--bg); cursor: pointer; transition: all 0.3s; display: flex; align-items: center; justify-content: center; margin: 8px 0; }
+.nav-dot:hover { border-color: var(--accent2); background: var(--accent-glow); }
+.nav-dot.active { border-color: var(--accent); background: var(--accent); box-shadow: 0 0 16px var(--accent-glow); }
+.nav-dot.visited { border-color: var(--accent2); background: var(--accent-glow); }
+.nav-dot-inner { width: 6px; height: 6px; border-radius: 50%; background: var(--text-dim); transition: all 0.3s; }
+.nav-dot.active .nav-dot-inner { background: var(--bg); width: 5px; height: 5px; }
+.nav-dot.visited .nav-dot-inner { background: var(--accent2); }
+.nav-tooltip { position: absolute; left: 44px; background: var(--surface2); border: 1px solid var(--border2); padding: 5px 10px; border-radius: 4px; font-family: 'Space Grotesk', sans-serif; font-size: 11px; font-weight: 300; color: var(--text); white-space: nowrap; opacity: 0; pointer-events: none; transition: opacity 0.2s; }
+.nav-dot:hover .nav-tooltip { opacity: 1; }
+.chapter-divider { width: 32px; height: 1px; background: var(--border2); margin: 4px 0; transition: opacity 0.4s; }
+
+#main { margin-left: var(--nav-w); }
+#hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 80px calc(var(--right-w) + 48px) 80px 72px; border-bottom: 1px solid var(--border); position: relative; overflow: hidden; }
+#hero::before { content: ''; position: absolute; bottom: -120px; right: 260px; width: 500px; height: 500px; border-radius: 50%; background: radial-gradient(circle, rgba(201,166,107,0.04) 0%, transparent 70%); pointer-events: none; }
+.hero-label { font-family: 'Space Grotesk', sans-serif; font-size: 10px; font-weight: 300; letter-spacing: 0.35em; text-transform: uppercase; color: var(--accent); margin-bottom: 32px; }
+#hero h1 { font-family: 'Crimson Pro', serif; font-weight: 300; font-size: clamp(3rem, 5vw, 5rem); line-height: 1.1; color: #e8e4dc; letter-spacing: -0.01em; max-width: 680px; margin-bottom: 32px; }
+#hero h1 em { font-style: italic; color: var(--accent); }
+.hero-sub { font-size: 1rem; color: var(--text-muted); max-width: 520px; line-height: 1.7; margin-bottom: 48px; }
+.begin-btn { display: inline-flex; align-items: center; gap: 10px; font-family: 'Space Grotesk', sans-serif; font-size: 12px; font-weight: 400; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); border: 1px solid var(--accent2); padding: 12px 24px; background: transparent; cursor: pointer; border-radius: 2px; transition: all 0.25s; }
+.begin-btn:hover { background: var(--accent-glow); border-color: var(--accent); }
+.begin-btn svg { transition: transform 0.25s; }
+.begin-btn:hover svg { transform: translateX(4px); }
+
+.section { display: grid; grid-template-columns: 1fr var(--right-w); border-bottom: 1px solid var(--border); min-height: 100vh; }
+.section-left { padding: 72px 40px 80px 72px; border-right: 1px solid var(--border); opacity: 0; transform: translateY(14px); transition: opacity 0.55s, transform 0.55s; }
+.section-left.visible { opacity: 1; transform: none; }
+.section-right { padding: 72px 24px 80px 24px; display: flex; flex-direction: column; gap: 14px; opacity: 0; transform: translateX(10px); transition: opacity 0.55s 0.12s, transform 0.55s 0.12s; }
+.section-right.visible { opacity: 1; transform: none; }
+
+.section-number { font-family: 'Space Mono', monospace; font-size: 10px; color: var(--text-dim); letter-spacing: 0.1em; margin-bottom: 20px; }
+.section h2 { font-family: 'Crimson Pro', serif; font-weight: 300; font-size: clamp(1.7rem, 2.8vw, 2.4rem); line-height: 1.2; color: #e0dbd2; max-width: 600px; margin-bottom: 34px; }
+.section h2 em { font-style: italic; color: var(--accent); }
+.prose { max-width: 600px; font-size: 1rem; color: var(--text); line-height: 1.85; }
+.prose p { margin-bottom: 1.35em; }
+.prose p:last-child { margin-bottom: 0; }
+
+.q-lead { font-family: 'Crimson Pro', serif; font-style: italic; font-size: 1rem; color: var(--accent); margin-bottom: 6px; margin-top: 26px; padding-left: 12px; border-left: 2px solid var(--accent2); line-height: 1.5; max-width: 600px; }
+
+.interactive { max-width: 600px; margin-top: 34px; }
+.panel { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+.panel-header { padding: 10px 16px; background: var(--surface2); border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 8px; }
+.panel-dot { width: 8px; height: 8px; border-radius: 50%; }
+.dot-red { background: #c96b5b; } .dot-yellow { background: #c9a66b; } .dot-green { background: #4aab7a; }
+.panel-title { font-family: 'Space Mono', monospace; font-size: 11px; color: var(--text-muted); margin-left: 4px; }
+.panel-body { padding: 18px; }
+.code-block { font-family: 'Space Mono', monospace; font-size: 12px; line-height: 1.65; color: var(--text); white-space: pre; }
+.code-keyword { color: #c792ea; } .code-type { color: #82aaff; } .code-num { color: #f78c6c; } .code-comment { color: var(--text-dim); } .code-fn { color: #82aaff; }
+.run-btn { display: inline-flex; align-items: center; gap: 8px; font-family: 'Space Grotesk', sans-serif; font-size: 12px; font-weight: 400; letter-spacing: 0.1em; color: var(--green); border: 1px solid rgba(74,171,122,0.3); padding: 8px 16px; background: var(--green-dim); cursor: pointer; border-radius: 4px; transition: all 0.2s; margin-top: 14px; }
+.run-btn:hover { background: rgba(74,171,122,0.2); border-color: var(--green); }
+.run-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+.output-area { background: #0a0a0c; border-top: 1px solid var(--border); padding: 13px 18px; font-family: 'Space Mono', monospace; font-size: 12px; line-height: 1.7; min-height: 54px; }
+.out-line { color: var(--text-muted); } .out-success { color: var(--green); } .out-fail { color: var(--red); } .out-accent { color: var(--accent); }
+#universe-canvas { width: 100%; height: 170px; background: #050507; border-top: 1px solid var(--border); display: block; }
+.prob-bar-wrap { background: #0a0a0c; border-radius: 3px; height: 7px; overflow: hidden; margin: 5px 0; }
+.prob-bar-fill { height: 100%; border-radius: 3px; transition: width 0.55s ease; }
+.slider-row { display: flex; align-items: center; gap: 12px; margin: 8px 0; }
+.slider-label { font-family: 'Space Grotesk', sans-serif; font-size: 12px; color: var(--text-muted); min-width: 112px; }
+.slider-val { font-family: 'Space Mono', monospace; font-size: 12px; color: var(--accent); min-width: 46px; text-align: right; }
+input[type=range] { flex: 1; height: 3px; -webkit-appearance: none; background: var(--border2); border-radius: 2px; outline: none; }
+input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 13px; height: 13px; border-radius: 50%; background: var(--accent); cursor: pointer; }
+.range-vis { margin: 14px 0; }
+.range-row { display: flex; align-items: center; gap: 9px; margin-bottom: 9px; }
+.range-name { font-family: 'Space Mono', monospace; font-size: 10px; color: var(--text-muted); width: 82px; flex-shrink: 0; }
+.range-track { flex: 1; height: 17px; position: relative; background: #0a0a0c; border-radius: 3px; border: 1px solid var(--border); overflow: hidden; }
+.range-fill { position: absolute; top: 0; bottom: 0; background: var(--blue-dim); border-right: 2px solid var(--blue); }
+.range-safe { position: absolute; top: 0; bottom: 0; background: rgba(74,171,122,0.22); border-left: 1px dashed var(--green); border-right: 1px dashed var(--green); }
+.chain { display: flex; flex-direction: column; }
+.chain-node { display: flex; align-items: flex-start; gap: 13px; padding: 12px 14px; border: 1px solid var(--border); background: var(--surface); border-radius: 6px; margin-bottom: 4px; transition: all 0.3s; cursor: pointer; position: relative; }
+.chain-node:not(:last-child)::after { content: ''; position: absolute; left: 22px; bottom: -15px; width: 1px; height: 15px; background: var(--border2); }
+.chain-node.lit { border-color: var(--accent2); background: var(--accent-glow); }
+.chain-node.question { border-color: rgba(91,141,217,0.3); background: var(--blue-dim); }
+.chain-icon { font-size: 12px; margin-top: 2px; flex-shrink: 0; }
+.chain-text { font-family: 'Crimson Pro', serif; font-size: 0.94rem; color: var(--text); line-height: 1.5; }
+.chain-text b { font-weight: 500; color: #e0dbd2; }
+.law-card { border: 1px solid var(--border); border-radius: 6px; padding: 14px 17px; margin-bottom: 9px; background: var(--surface); transition: border-color 0.2s; }
+.law-card:hover { border-color: var(--border2); }
+.law-name { font-family: 'Space Grotesk', sans-serif; font-size: 11px; font-weight: 500; color: var(--accent); letter-spacing: 0.05em; margin-bottom: 5px; }
+.law-statement { font-family: 'Crimson Pro', serif; font-style: italic; color: var(--text-muted); font-size: 0.96rem; margin-bottom: 7px; }
+.law-body { font-family: 'Crimson Pro', serif; font-size: 0.88rem; color: var(--text-dim); line-height: 1.55; }
+.fork-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
+.fork-card { border: 1px solid var(--border); border-radius: 6px; padding: 14px 15px; background: var(--surface); transition: all 0.3s; cursor: pointer; }
+.fork-card:hover { border-color: var(--border2); }
+.fork-card.chosen { border-color: var(--accent); background: var(--accent-glow); }
+.fork-label { font-family: 'Space Grotesk', sans-serif; font-size: 9px; letter-spacing: 0.2em; color: var(--text-dim); text-transform: uppercase; margin-bottom: 6px; }
+.fork-title { font-family: 'Crimson Pro', serif; font-size: 1rem; color: #e0dbd2; margin-bottom: 7px; }
+.fork-body { font-family: 'Crimson Pro', serif; font-size: 0.87rem; color: var(--text-muted); line-height: 1.55; }
+.fork-result { font-family: 'Space Mono', monospace; font-size: 10px; color: var(--accent); margin-top: 9px; opacity: 0; transition: opacity 0.4s; line-height: 1.5; }
+.fork-card.chosen .fork-result { opacity: 1; }
+
+/* Right panel cards */
+.rcard { border: 1px solid var(--border); border-radius: 6px; background: var(--surface); overflow: hidden; }
+.rcard-header { padding: 9px 13px; border-bottom: 1px solid var(--border); font-family: 'Space Grotesk', sans-serif; font-size: 9px; font-weight: 400; letter-spacing: 0.25em; text-transform: uppercase; color: var(--text-dim); }
+.rcard-body { padding: 13px; }
+.right-label { font-family: 'Space Grotesk', sans-serif; font-size: 9px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 12px; margin-top: 4px; }
+.hypo-card { border: 1px solid var(--border); border-radius: 6px; padding: 13px; background: var(--surface); }
+.hypo-card+.hypo-card { margin-top: 8px; }
+.hypo-label { font-family: 'Space Grotesk', sans-serif; font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 5px; }
+.hypo-title { font-family: 'Crimson Pro', serif; font-size: 0.98rem; color: #e0dbd2; margin-bottom: 5px; }
+.hypo-body { font-family: 'Crimson Pro', serif; font-size: 0.85rem; color: var(--text-muted); line-height: 1.5; }
+.hypo-note { font-family: 'Space Mono', monospace; font-size: 10px; color: var(--text-dim); margin-top: 7px; line-height: 1.5; }
+.formula-card { border: 1px solid var(--border2); border-radius: 6px; padding: 15px 13px; background: var(--surface); }
+.formula-eq { font-family: 'Crimson Pro', serif; font-style: italic; font-size: 0.97rem; color: var(--accent); line-height: 1.6; margin-bottom: 12px; text-align: center; }
+.formula-row { display: flex; align-items: flex-start; gap: 10px; font-family: 'Crimson Pro', serif; font-size: 0.83rem; margin-bottom: 8px; }
+.formula-sym { font-style: italic; color: var(--accent); min-width: 92px; flex-shrink: 0; }
+.formula-desc { color: var(--text-dim); line-height: 1.45; }
+.evo-card { border: 1px solid var(--border); border-radius: 6px; background: var(--surface); overflow: hidden; }
+.evo-step { padding: 10px 13px; border-bottom: 1px solid var(--border); display: grid; grid-template-columns: 16px 1fr; gap: 9px; align-items: start; }
+.evo-step:last-child { border-bottom: none; }
+.evo-num { font-family: 'Space Mono', monospace; font-size: 10px; color: var(--text-dim); padding-top: 2px; }
+.evo-title { font-family: 'Space Grotesk', sans-serif; font-size: 11px; font-weight: 500; color: var(--accent); margin-bottom: 3px; }
+.evo-body { font-family: 'Crimson Pro', serif; font-size: 0.83rem; color: var(--text-muted); line-height: 1.5; }
+.evo-formula { font-family: 'Space Mono', monospace; font-size: 9px; color: var(--text-dim); margin-top: 4px; line-height: 1.5; }
+.can-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px; }
+.can-box { border-radius: 5px; padding: 11px 12px; }
+.can-box.yes { border: 1px solid rgba(74,171,122,0.3); background: var(--green-dim); }
+.can-box.no { border: 1px solid rgba(201,107,91,0.3); background: var(--red-dim); }
+.can-tag { font-family: 'Space Grotesk', sans-serif; font-size: 9px; letter-spacing: 0.2em; margin-bottom: 5px; }
+.can-tag.yes { color: var(--green); } .can-tag.no { color: var(--red); }
+.can-body { font-family: 'Crimson Pro', serif; font-size: 0.83rem; color: var(--text-muted); line-height: 1.5; }
+
+#progress-bar { position: fixed; bottom: 0; left: var(--nav-w); right: 0; height: 2px; background: var(--border); z-index: 50; }
+#progress-fill { height: 100%; background: var(--accent); transition: width 0.2s; width: 0%; }
+
+@media (max-width: 900px) {
+  .section { grid-template-columns: 1fr; }
+  .section-right { display: none; }
+  .section-left, #hero { padding-right: 40px; }
+}
+@media (max-width: 600px) {
+  #hero, .section-left { padding: 48px 28px 60px; }
+  .fork-wrap { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+<nav id="sidebar">
+  <span class="sidebar-title" id="sidebar-title">On Existence</span>
+  <div class="chapter-badge" id="chapter-badge">I / II</div>
+  <div class="nav-chapters">
+    <div class="nav-track" id="nav-track-1"></div>
+    <div class="nav-track hidden" id="nav-track-2"></div>
+  </div>
+</nav>
+<div id="progress-bar"><div id="progress-fill"></div></div>
+<div id="main">
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-label">A Philosophical Inquiry</div>
+  <h1>Does the Universe<br>Need <em>a Cause?</em></h1>
+  <p class="hero-sub">On existence, fine-tuning, causality, and the limits of physics. Follow the argument from a C++ program running universes, to the question that physics alone cannot answer.</p>
+  <button class="begin-btn" onclick="document.getElementById('s1').scrollIntoView({behavior:'smooth'})">
+    Begin
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
+</section>
+
+<!-- S1 -->
+<section class="section" id="s1">
+  <div class="section-left">
+    <div class="section-number">01 / 09</div>
+    <h2>The Universe as a C++ Program</h2>
+    <div class="prose">
+      <p>Imagine you write a C++ program. Every time you compile and run it, it simulates a full universe from scratch. The Big Bang happens, physics takes over, everything unfolds. Stars ignite, planets cool, billions of years pass in an instant of compute time.</p>
+      <p>Now press Run. Would you get life on the first attempt? Or would you need to press it thousands of times? Millions? The question sounds simple, but it cracks open something very deep about existence.</p>
+      <p>In this first version of the program, the constants are already hardcoded: the speed of light, gravity, electromagnetism — all set to the values we've measured. Each run plays by identical rules but with different random initial conditions. The only variable is the seeding of the primordial plasma.</p>
+
+      <p class="q-lead">But how often does life actually appear? Surely a universe this vast makes it common?</p>
+      <p>Even with constants locked in, scientists genuinely disagree. Some think life is nearly inevitable — hundreds of billions of galaxies, each with hundreds of billions of stars, and organic molecules form spontaneously in space. Others point to the Fermi Paradox: if life is so easy, why is the observable universe so silent? The three positions to the right are all scientifically defensible. None has been ruled out. They tell us how many runs we'd need — not whether a cause is required.</p>
+      <p>Notice what this first framing already reveals: even when the universe is pre-loaded with life-friendly rules, the emergence of life is not guaranteed. And the deeper question — <em>why those rules are set the way they are</em> — hasn't even been asked yet.</p>
+    </div>
+    <div class="interactive">
+      <div class="panel">
+        <div class="panel-header">
+          <div class="panel-dot dot-red"></div><div class="panel-dot dot-yellow"></div><div class="panel-dot dot-green"></div>
+          <span class="panel-title">universe_sim.cpp — hardcoded constants</span>
+        </div>
+        <div class="panel-body">
+          <div class="code-block"><span class="code-keyword">const</span> <span class="code-type">double</span> SPEED_OF_LIGHT   = <span class="code-num">299792458.0</span>;  <span class="code-comment">// m/s</span>
+<span class="code-keyword">const</span> <span class="code-type">double</span> GRAVITY_CONSTANT = <span class="code-num">6.674e-11</span>;    <span class="code-comment">// N·m²/kg²</span>
+<span class="code-keyword">const</span> <span class="code-type">double</span> EXPANSION_RATE   = <span class="code-num">67.4</span>;          <span class="code-comment">// km/s/Mpc</span>
+<span class="code-keyword">const</span> <span class="code-type">double</span> EM_COUPLING      = <span class="code-num">0.007297</span>;      <span class="code-comment">// fine structure α</span>
+
+<span class="code-type">Universe</span> <span class="code-fn">run</span>() {
+  <span class="code-type">Universe</span> u(GRAVITY_CONSTANT, EXPANSION_RATE, EM_COUPLING);
+  u.<span class="code-fn">bigBang</span>();
+  u.<span class="code-fn">evolve</span>(<span class="code-num">13.8e9</span>); <span class="code-comment">// years</span>
+  <span class="code-keyword">return</span> u;
+}</div>
+          <div style="display:flex;align-items:center;gap:12px;margin-top:14px;flex-wrap:wrap;">
+            <button class="run-btn" id="run-btn1" onclick="runSim()">
+              <svg width="10" height="10" viewBox="0 0 10 10"><polygon points="2,1 9,5 2,9" fill="currentColor"/></svg>Run
+            </button>
+            <span style="font-family:'Space Mono',monospace;font-size:11px;color:var(--text-dim)" id="run-count1">Attempts: 0</span>
+          </div>
+        </div>
+        <div class="output-area" id="output1"><span class="out-line">// Press Run to simulate a universe...</span></div>
+        <canvas id="universe-canvas"></canvas>
+      </div>
+    </div>
+  </div>
+  <div class="section-right">
+    <div class="right-label">Three positions — all defensible</div>
+    <div class="hypo-card" style="border-color:rgba(74,171,122,0.3);">
+      <div class="hypo-label" style="color:var(--green);">Position A</div>
+      <div class="hypo-title">High probability of life</div>
+      <div class="hypo-body">Chemistry, planetary conditions, and deep time make life nearly inevitable wherever the basics are in place.</div>
+      <div class="hypo-note">→ Fewer runs needed. Life appears in many runs, perhaps most.</div>
+    </div>
+    <div class="hypo-card" style="border-color:rgba(201,166,107,0.35);">
+      <div class="hypo-label" style="color:var(--accent);">Position B</div>
+      <div class="hypo-title">Low probability of life</div>
+      <div class="hypo-body">The jump from chemistry to self-replicating life may be extraordinarily rare. The Fermi Paradox — the silence of space — supports this.</div>
+      <div class="hypo-note">→ Many runs needed. Life is rare; complex life rarer still.</div>
+    </div>
+    <div class="hypo-card" style="border-color:rgba(201,107,91,0.3);">
+      <div class="hypo-label" style="color:var(--red);">Position C</div>
+      <div class="hypo-title">Earth-like life is vanishingly rare</div>
+      <div class="hypo-body">Stable star, habitable zone, magnetic field, plate tectonics, right evolutionary accidents — each factor multiplies the rarity.</div>
+      <div class="hypo-note">→ Astronomical runs needed. Possibly impossible without pre-selection.</div>
+    </div>
+    <div class="rcard">
+      <div class="rcard-header">Scientific status</div>
+      <div class="rcard-body" style="font-family:'Crimson Pro',serif;font-size:0.87rem;color:var(--text-muted);line-height:1.6;">None of these has been ruled out. Science cannot currently distinguish between them. They tell us how many runs we might need — not whether a cause for the constants is required.</div>
+    </div>
+  </div>
+</section>
+
+<!-- S2 -->
+<section class="section" id="s2">
+  <div class="section-left">
+    <div class="section-number">02 / 09</div>
+    <h2>What if the Constants Weren't Fixed?</h2>
+    <div class="prose">
+      <p>Now change the program. Instead of hardcoding the constants, replace each one with a function that returns a random value within some bounded range. Gravity, the expansion rate, the strength of electromagnetism — all drawn randomly within plausible limits.</p>
+
+      <p class="q-lead">Surely with reasonable ranges we'd still land near workable values often enough?</p>
+      <p>No — and this is the key surprise. Most combinations of constants don't just fail to produce life. They fail to produce any stable structure at all. If gravity is too strong, the universe collapses within moments — long before stars can form. Too weak, and matter never clumps. Hawking calculated that if the expansion rate one second after the Big Bang had been smaller by even one part in a hundred thousand million million, the universe would have collapsed before reaching its present size.</p>
+      <p>The life-permitting region of this parameter space is not a small island. It is a thread — almost impossibly narrow — running through an enormous landscape of dead configurations. The probability of life is now a product: the chance of landing in a viable universe multiplied by the chance that life then emerges within it. The first factor may already be so small that the second barely matters.</p>
+      <p>Drag the sliders below to see how quickly the combined probability collapses as constants drift from the life-permitting window.</p>
+    </div>
+    <div class="interactive">
+      <div class="panel">
+        <div class="panel-header">
+          <div class="panel-dot dot-red"></div><div class="panel-dot dot-yellow"></div><div class="panel-dot dot-green"></div>
+          <span class="panel-title">universe_sim.cpp — randomised bounded constants</span>
+        </div>
+        <div class="panel-body">
+          <div class="code-block"><span class="code-comment">// Constants now drawn from bounded random ranges</span>
+<span class="code-type">double</span> G  = <span class="code-fn">randomInRange</span>(<span class="code-num">0</span>, <span class="code-num">1e-7</span>);
+<span class="code-type">double</span> H0 = <span class="code-fn">randomInRange</span>(<span class="code-num">0</span>, <span class="code-num">200</span>);
+<span class="code-type">double</span> a  = <span class="code-fn">randomInRange</span>(<span class="code-num">0</span>, <span class="code-num">1</span>);</div>
+          <p style="font-family:'Space Grotesk',sans-serif;font-size:11px;color:var(--text-muted);margin-top:13px;margin-bottom:9px;">Adjust each constant. Green = within life-permitting window.</p>
+          <div class="slider-row"><span class="slider-label">Gravity</span><input type="range" min="0" max="100" value="50" oninput="updateRanges()" id="sl-gravity"><span class="slider-val" id="sv-gravity">50%</span></div>
+          <div class="slider-row"><span class="slider-label">Expansion rate</span><input type="range" min="0" max="100" value="50" oninput="updateRanges()" id="sl-expand"><span class="slider-val" id="sv-expand">50%</span></div>
+          <div class="slider-row"><span class="slider-label">EM coupling</span><input type="range" min="0" max="100" value="50" oninput="updateRanges()" id="sl-em"><span class="slider-val" id="sv-em">50%</span></div>
+          <div style="margin-top:14px;" id="prob-display"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="section-right">
+    <div class="right-label">The compound probability</div>
+    <div class="formula-card">
+      <div class="formula-eq">P(life) = P(viable) × P(life | viable)</div>
+      <div style="border-top:1px solid var(--border);padding-top:12px;margin-top:4px;">
+        <div class="formula-row"><span class="formula-sym">P(life)</span><span class="formula-desc">Overall probability that a single run produces life anywhere in the universe.</span></div>
+        <div class="formula-row"><span class="formula-sym">P(viable)</span><span class="formula-desc">Probability the random constants produce a universe where atoms, stars, and chemistry are possible at all.</span></div>
+        <div class="formula-row"><span class="formula-sym">P(life | viable)</span><span class="formula-desc">Given a viable universe, the probability life actually emerges from its chemistry.</span></div>
+      </div>
+    </div>
+    <div class="rcard">
+      <div class="rcard-header">Why the first term dominates</div>
+      <div class="rcard-body" style="font-family:'Crimson Pro',serif;font-size:0.87rem;color:var(--text-muted);line-height:1.6;">P(viable) may already be so small — tuned to 1 part in 10¹⁷ by Hawking's figure — that it overwhelms everything else in the product. Even if life is common in the right universe, that doesn't help if the right universe almost never appears.</div>
+    </div>
+    <div class="rcard">
+      <div class="rcard-header">Hawking's observation</div>
+      <div class="rcard-body" style="font-family:'Crimson Pro',serif;font-style:italic;font-size:0.86rem;color:var(--text-muted);line-height:1.6;">"If the rate of expansion one second after the Big Bang had been smaller by even one part in a hundred thousand million million, the universe would have collapsed before it ever reached its present size."</div>
+    </div>
+  </div>
+</section>
+
+<!-- S3 -->
+<section class="section" id="s3">
+  <div class="section-left">
+    <div class="section-number">03 / 09</div>
+    <h2>Randomising the Randomness Itself</h2>
+    <div class="prose">
+      <p>Go one layer deeper. Until now, we chose the boundaries of our random ranges — we decided that gravity would fall somewhere from 0 to some maximum. But who chose those boundaries? Now make the boundaries themselves random. We don't know if a constant ranges from 0 to 1, or 0 to a billion. The scale of each range is itself unknown and unspecified.</p>
+
+      <p class="q-lead">Doesn't this make things more neutral — removing our hidden bias about what's "reasonable"?</p>
+      <p>It seems that way. But it actually makes things worse. When boundary selection is truly unconstrained, large ranges tend to dominate the available space — a random process unconstrained in scale will, more often than not, produce enormous ranges. And when the range is enormous and the life-permitting window is narrow and fixed, the probability of landing in the window becomes negligible. The move toward apparent neutrality reduces the probability further still.</p>
+
+      <p class="q-lead">Can't we keep adding layers of randomness until the model is truly unbiased?</p>
+      <p>No — and this exposes a structural problem. No matter how many layers of randomness are stacked, a probability distribution must be specified at every level. The question "how many runs until life?" only has meaning if you define, at each level, how values are distributed. This is the measure problem in cosmology. Every claim about the likelihood of a universe secretly contains an assumption about what distribution governs the process — and that assumption is never neutral. The appearance of impartiality always hides a choice.</p>
+
+      <p>Drag the range width below and watch the life-permitting window shrink relative to the sampled space.</p>
+    </div>
+    <div class="interactive">
+      <div class="panel">
+        <div class="panel-header">
+          <div class="panel-dot dot-red"></div><div class="panel-dot dot-yellow"></div><div class="panel-dot dot-green"></div>
+          <span class="panel-title">Range width vs. life-permitting window</span>
+        </div>
+        <div class="panel-body">
+          <p style="font-family:'Space Grotesk',sans-serif;font-size:11px;color:var(--text-muted);margin-bottom:13px;">Green = where life is possible. Blue = sampled range. Widen the range and watch the overlap collapse.</p>
+          <div class="slider-row"><span class="slider-label">Range width</span><input type="range" min="1" max="100" value="10" oninput="updateRangeVis()" id="sl-range"><span class="slider-val" id="sv-range">Narrow</span></div>
+          <div class="range-vis" id="range-vis"></div>
+          <div style="margin-top:9px;padding:10px 13px;background:var(--surface2);border-radius:4px;font-family:'Space Mono',monospace;font-size:11px;line-height:1.8;" id="range-analysis"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="section-right">
+    <div class="right-label">How the model evolved</div>
+    <div class="evo-card">
+      <div class="evo-step">
+        <div class="evo-num">1</div>
+        <div><div class="evo-title">Fixed constants</div><div class="evo-body">All constants hardcoded. Every run is eligible.</div><div class="evo-formula">P(life) = P(life | fixed)</div></div>
+      </div>
+      <div class="evo-step">
+        <div class="evo-num">2</div>
+        <div><div class="evo-title">Random constants, fixed ranges</div><div class="evo-body">Constants drawn from ranges we chose. Most combinations produce dead universes.</div><div class="evo-formula">P(life) = P(viable) × P(life | viable)</div></div>
+      </div>
+      <div class="evo-step">
+        <div class="evo-num">3</div>
+        <div><div class="evo-title">Random constants, random ranges</div><div class="evo-body">Even boundaries are random. Wide ranges dominate, shrinking the life-permitting slice.</div><div class="evo-formula">P(life) = P(good range) × P(viable | range) × P(life | viable)</div></div>
+      </div>
+      <div class="evo-step">
+        <div class="evo-num">✦</div>
+        <div><div class="evo-title">The measure problem</div><div class="evo-body">At every layer, a distribution must be specified. "Truly random" is not a neutral choice — it is itself a choice about what values are likely.</div></div>
+      </div>
+    </div>
+    <div class="rcard">
+      <div class="rcard-header">Key insight</div>
+      <div class="rcard-body" style="font-family:'Crimson Pro',serif;font-size:0.87rem;color:var(--text-muted);line-height:1.6;">Adding layers of randomness does not avoid fine-tuning. It relocates it. Each layer introduces a new hidden assumption. The problem simply moves one level up.</div>
+    </div>
+  </div>
+</section>
+
+<!-- S4 -->
+<section class="section" id="s4">
+  <div class="section-left">
+    <div class="section-number">04 / 09</div>
+    <h2>The Anthropic Principle — and Why It Doesn't Settle Anything</h2>
+    <div class="prose">
+      <p>At this point the obvious response presents itself. We observe a life-permitting universe not because such universes are common, but because only such universes can be observed. This is the Anthropic Principle: any observer will necessarily find themselves in conditions compatible with their existence.</p>
+
+      <p class="q-lead">Doesn't that dissolve the problem? Of course we see a life-permitting universe — we wouldn't be here to ask otherwise.</p>
+      <p>It is a genuine logical truth — but far more limited than it appears. The Anthropic Principle is a selection effect, not a probability claim. It tells us we shouldn't be surprised to observe life-compatible conditions, given that we exist to observe anything. What it does not tell us is how likely those conditions were, whether the program was run once or many times, or what explains those conditions in the first place. It shifts the framing of the observation. It does not explain the observation.</p>
+      <p>Consider: if the program ran only once, and the constants happened to land in the narrow life-permitting range, that single successful outcome is still genuinely improbable. The Anthropic Principle doesn't dissolve that improbability — it only says that, improbable or not, we can only ever observe the successes.</p>
+
+      <p class="q-lead">But what if the program ran many times — a multiverse? Then rare events are expected, and the reasoning fully applies.</p>
+      <p>Exactly — and that is the unresolved variable. The Anthropic Principle does real work only if there is a large ensemble of universes. But the multiverse is not an established fact. It is a theoretical framework suggested by certain models, none of which are confirmed. The honest answer to "how many times was the program run?" is: we do not know.</p>
+    </div>
+    <div class="interactive">
+      <div class="panel">
+        <div class="panel-header">
+          <div class="panel-dot dot-red"></div><div class="panel-dot dot-yellow"></div><div class="panel-dot dot-green"></div>
+          <span class="panel-title">What the Anthropic Principle can and cannot do</span>
+        </div>
+        <div class="panel-body">
+          <div class="can-grid">
+            <div class="can-box yes"><div class="can-tag yes">It can</div><div class="can-body">Explain why we don't observe life-hostile conditions — given that we exist to observe anything at all.</div></div>
+            <div class="can-box no"><div class="can-tag no">It cannot</div><div class="can-body">Tell us how likely our conditions were, how many universes exist, or replace a deeper explanation for why they are what they are.</div></div>
+          </div>
+          <div style="padding:12px 14px;border:1px solid var(--border2);border-radius:5px;background:var(--surface2);text-align:center;">
+            <div style="font-family:'Space Grotesk',sans-serif;font-size:9px;letter-spacing:0.2em;color:var(--text-dim);margin-bottom:6px;">The unresolved variable</div>
+            <div style="font-family:'Space Mono',monospace;font-size:14px;color:var(--accent);padding:6px 0;">N = number of runs</div>
+            <div style="font-family:'Crimson Pro',serif;font-size:0.88rem;color:var(--text-muted);">N = 1 → improbability demands explanation<br>N ≫ 1 → rare events are expected<br><em>We don't know N.</em></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="section-right">
+    <div class="right-label">The two scenarios</div>
+    <div class="rcard"><div class="rcard-header">Scenario A — one run</div><div class="rcard-body" style="font-family:'Crimson Pro',serif;font-size:0.87rem;color:var(--text-muted);line-height:1.6;">Constants sampled once. Life-permitting region is tiny. Getting here is genuinely improbable — and that improbability still demands explanation. Anthropic reasoning provides none.</div></div>
+    <div class="rcard"><div class="rcard-header">Scenario B — many runs</div><div class="rcard-body" style="font-family:'Crimson Pro',serif;font-size:0.87rem;color:var(--text-muted);line-height:1.6;">Program runs many times. Even rare configurations eventually appear. We find ourselves in a successful run — unsurprising. But this requires the multiverse to exist, which is unconfirmed.</div></div>
+    <div class="rcard"><div class="rcard-header">Multiverse theories</div><div class="rcard-body" style="font-family:'Crimson Pro',serif;font-size:0.87rem;color:var(--text-muted);line-height:1.6;">Eternal inflation, string landscape, many-worlds — all propose many runs. None are experimentally confirmed. And all raise the same question one level up: what governs the multiverse itself?</div></div>
+  </div>
+</section>
+
+<!-- S5 -->
+<section class="section" id="s5">
+  <div class="section-left">
+    <div class="section-number">05 / 09</div>
+    <h2>The Deeper Absurdity: That the Program Exists at All</h2>
+    <div class="prose">
+      <p>All of the above presupposes that the program exists — that there is a substrate, a set of laws, a mathematical structure in which the simulation runs. But the Big Bang model says nothing about where any of that came from. Push the equations of General Relativity backward and you hit a singularity — density goes to infinity, the equations break down, and reliable prediction stops. Physics can describe the universe from a tiny fraction of a second after the beginning. It cannot describe the beginning itself.</p>
+
+      <p class="q-lead">Fine — so maybe the universe simply always existed. Eternal, no beginning, no need for a cause.</p>
+      <p>This is the second hypothesis — and it has its own deep problem. If the universe always existed in a stable, hot, dense state, something must account for why expansion began at t = 0 rather than never, or a billion years earlier, or later. An eternal system in a stable state does not spontaneously change without a law governing when and how it changes — and that law is already something that must be explained. Eternity going forward from a starting point is coherent. But a past extending infinitely backward that nonetheless terminates in a specific event at a specific moment requires a principle that selects that moment. Such a principle is not free. It is itself a fact demanding explanation.</p>
+
+      <p class="q-lead">What about the multiverse? If infinitely many universes are always being generated, maybe no single cause is needed.</p>
+      <p>The multiverse doesn't resolve this — it relocates it. The multiverse itself exists, operates according to laws, and generates universes by some mechanism. All of those things exist and must be accounted for. Every answer of this form defers rather than explains. The ignorance of a cause is not the same as the absence of a cause.</p>
+    </div>
+    <div class="interactive">
+      <div class="panel">
+        <div class="panel-header">
+          <div class="panel-dot dot-red"></div><div class="panel-dot dot-yellow"></div><div class="panel-dot dot-green"></div>
+          <span class="panel-title">The reach of physics and what lies beyond</span>
+        </div>
+        <div class="panel-body">
+          <div style="position:relative;padding:16px 0;">
+            <div style="position:absolute;left:50%;top:0;bottom:0;width:1px;background:var(--border2);transform:translateX(-50%);"></div>
+            <div style="display:flex;justify-content:center;margin-bottom:18px;"><div style="background:var(--surface2);border:1px solid var(--border2);border-radius:16px;padding:4px 14px;font-family:'Space Mono',monospace;font-size:11px;color:var(--accent);">t = 0 — singularity</div></div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:13px;margin-bottom:13px;">
+              <div style="text-align:right;padding-right:20px;"><div style="font-family:'Space Grotesk',sans-serif;font-size:9px;letter-spacing:0.15em;color:var(--red);margin-bottom:4px;">BEFORE</div><div style="font-family:'Crimson Pro',serif;font-size:0.88rem;color:var(--text-muted);line-height:1.55;">GR breaks down. No reliable theory covers this. Only hypotheses remain.</div></div>
+              <div style="padding-left:20px;"><div style="font-family:'Space Grotesk',sans-serif;font-size:9px;letter-spacing:0.15em;color:var(--green);margin-bottom:4px;">AFTER</div><div style="font-family:'Crimson Pro',serif;font-size:0.88rem;color:var(--text-muted);line-height:1.55;">Physics describes from 10⁻⁴³ s onward. Stars, galaxies, chemistry, evolution.</div></div>
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px;">
+              <div style="border:1px solid var(--border);border-radius:5px;padding:10px 12px;background:var(--surface);"><div style="font-family:'Space Grotesk',sans-serif;font-size:9px;color:var(--text-dim);margin-bottom:4px;">HYPOTHESIS A</div><div style="font-family:'Crimson Pro',serif;font-size:0.86rem;color:var(--text-muted);line-height:1.5;">Universe from nothing. <em>What caused it?</em></div></div>
+              <div style="border:1px solid var(--border);border-radius:5px;padding:10px 12px;background:var(--surface);"><div style="font-family:'Space Grotesk',sans-serif;font-size:9px;color:var(--text-dim);margin-bottom:4px;">HYPOTHESIS B</div><div style="font-family:'Crimson Pro',serif;font-size:0.86rem;color:var(--text-muted);line-height:1.5;">Universe eternal. <em>Why did it change at t = 0?</em></div></div>
+            </div>
+            <div style="text-align:center;margin-top:13px;padding:10px;background:var(--accent-glow);border:1px solid var(--accent2);border-radius:4px;"><div style="font-family:'Crimson Pro',serif;font-style:italic;font-size:0.95rem;color:var(--accent);">In both cases, the question of a cause remains.</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="section-right">
+    <div class="right-label">The eternal state problem</div>
+    <div class="rcard"><div class="rcard-header">Why eternity doesn't help</div><div class="rcard-body" style="font-family:'Crimson Pro',serif;font-size:0.87rem;color:var(--text-muted);line-height:1.6;">Eternity forward from a starting point is coherent. But an infinite past that terminates in a specific event — the Big Bang at t = 0 — requires a principle that selects that moment. What decides the universe transitions precisely then?</div></div>
+    <div class="rcard"><div class="rcard-header">The multiverse deferral</div><div class="rcard-body" style="font-family:'Crimson Pro',serif;font-size:0.87rem;color:var(--text-muted);line-height:1.6;">Multiverse → same question one level up.<br>Laws of multiverse → same question again.<br><br>This is not an explanation. It is an infinite regress wearing the costume of one.</div></div>
+  </div>
+</section>
+
+<!-- S6 -->
+<section class="section" id="s6">
+  <div class="section-left">
+    <div class="section-number">06 / 09</div>
+    <h2>The Question Is Not "Before" in Time</h2>
+    <div class="prose">
+      <p>Here is the most common evasion of the argument, and why it fails. The objection goes: causality depends on time. If time itself began at the singularity, asking what happened "before" is like asking what is north of the North Pole — the question is ill-formed, a category error.</p>
+
+      <p class="q-lead">Isn't that fair? If time began at t = 0, there is literally no "before" in which a cause could operate.</p>
+      <p>The objection attacks the language, not the substance. The question being asked is not "what happened before the Big Bang in physical time." It is: why does the universe exist at all? This is a question about ontological dependence — what explains the universe's existence — not about temporal precedence. Even if time began with the Big Bang, the coming-into-existence of the universe still demands explanation, because something coming from absolute nothing without any cause contradicts the very principle of reason. Removing the temporal edge doesn't remove the need for a cause. It only changes the form of the question without answering it.</p>
+
+      <p class="q-lead">But in physics, things can come from "nothing" — quantum particles appear from the vacuum all the time. Doesn't this show something can arise without a cause?</p>
+      <p>This conflates two very different senses of "nothing." The quantum vacuum is not nothing. It is a physical entity with structure, laws, and energy — it is very much something. Spontaneous particle creation in the vacuum is not creation from nothing; it is a process that occurs within an already-existing physical framework, governed by pre-existing laws. Calling it emergence from "nothing" is a language trick, not a physical fact. The question of what brought the quantum vacuum into existence, and what established the laws it obeys, is the original question — pushed back one step, but not answered.</p>
+      <p>Click through the causality chain below to trace how every attempted answer defers rather than resolves.</p>
+    </div>
+    <div class="interactive">
+      <div class="panel">
+        <div class="panel-header">
+          <div class="panel-dot dot-red"></div><div class="panel-dot dot-yellow"></div><div class="panel-dot dot-green"></div>
+          <span class="panel-title">The regress — click each node to trace</span>
+        </div>
+        <div class="panel-body">
+          <div class="chain" id="chain">
+            <div class="chain-node" onclick="litNode(0)"><div class="chain-icon">⬡</div><div class="chain-text"><b>Quantum vacuum</b> — particles appear spontaneously. "Something from nothing?"</div></div>
+            <div class="chain-node" onclick="litNode(1)"><div class="chain-icon">⬡</div><div class="chain-text"><b>No.</b> The vacuum has energy, laws, structure. It is something. <em>Who brought the vacuum into existence?</em></div></div>
+            <div class="chain-node" onclick="litNode(2)"><div class="chain-icon">⬡</div><div class="chain-text"><b>A prior field or geometry</b> — maybe the vacuum emerged from something more fundamental.</div></div>
+            <div class="chain-node" onclick="litNode(3)"><div class="chain-icon">⬡</div><div class="chain-text"><b>Same problem.</b> That prior state also has structure and laws. <em>What brought that into existence?</em></div></div>
+            <div class="chain-node" onclick="litNode(4)"><div class="chain-icon">⬡</div><div class="chain-text"><b>The multiverse</b> — an ensemble of states, laws, and fields, generating universes endlessly.</div></div>
+            <div class="chain-node question" onclick="litNode(5)"><div class="chain-icon">?</div><div class="chain-text"><b>Same question.</b> The multiverse exists and operates by laws. Wherever the chain terminates, something exists without explanation — or we accept a brute fact and call it a terminus.</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="section-right">
+    <div class="right-label">The objections and their limits</div>
+    <div class="rcard"><div class="rcard-header">The temporal objection</div><div class="rcard-body" style="font-family:'Crimson Pro',serif;font-size:0.87rem;color:var(--text-muted);line-height:1.6;">"There is no before." — True in physical time. But the question is about ontological grounding, not temporal precedence. Removing the temporal edge does not remove the need for a cause.</div></div>
+    <div class="rcard"><div class="rcard-header">The quantum objection</div><div class="rcard-body" style="font-family:'Crimson Pro',serif;font-size:0.87rem;color:var(--text-muted);line-height:1.6;">"Particles appear from nothing." — The quantum vacuum is not nothing. It has energy, laws, and structure. Calling it "nothing" is a language error that sounds like a physical one.</div></div>
+    <div class="rcard"><div class="rcard-header">Hawking's no-boundary model</div><div class="rcard-body" style="font-family:'Crimson Pro',serif;font-size:0.87rem;color:var(--text-muted);line-height:1.6;">Removes the temporal edge. Does not remove the ontological question. A circle has no beginning, but it still requires an explanation for why it exists at all.</div></div>
+  </div>
+</section>
+
+<!-- S7 -->
+<section class="section" id="s7">
+  <div class="section-left">
+    <div class="section-number">07 / 09</div>
+    <h2>Logic Before Physics</h2>
+    <div class="prose">
+      <p>At this point the objection is raised: the principle of causality is not a scientifically proven law — it is a metaphysical principle, and therefore carries no force in serious inquiry. We should stick to what science can confirm.</p>
+
+      <p class="q-lead">That seems reasonable. Science is our most reliable method for understanding reality. Why bring in philosophy when we have it?</p>
+      <p>Because science is built on logic — not the other way around. Physics operates within the universe, describing how its structures evolve and its parts interact. When the question is "why does the universe exist at all?", that question is structurally prior to any physical description. The tools for answering it are not experimental. To refuse a logical argument because it hasn't been scientifically verified is to apply science in a domain it was never designed to reach — and to forget what science itself is standing on.</p>
+      <p>The laws below are not scientific hypotheses that science has tested. They are preconditions of rational thought — the foundations on which science is built, and without which no scientific inference would hold. Science uses them; it cannot prove them without circularity; and it cannot survive their denial.</p>
+    </div>
+    <div class="interactive" style="max-width:600px;margin-top:28px;">
+      <div class="law-card">
+        <div class="law-name">Law of Non-Contradiction</div>
+        <div class="law-statement">"A proposition cannot be both true and false at the same time and in the same respect."</div>
+        <div class="law-body">Every scientific inference depends on this. You cannot deny it without using it — denial asserts something as true, which presupposes the law. It is not a result of science. It is the ground on which science stands.</div>
+      </div>
+      <div class="law-card">
+        <div class="law-name">Law of Identity</div>
+        <div class="law-statement">"A thing is identical to itself (A = A)."</div>
+        <div class="law-body">Science assumes objects have stable identities across observations. Denying it makes empirical observation incoherent. Cannot be proven scientifically without circularity.</div>
+      </div>
+      <div class="law-card">
+        <div class="law-name">Law of Excluded Middle</div>
+        <div class="law-statement">"For any proposition P, either P is true or its negation is true."</div>
+        <div class="law-body">Scientific hypotheses must be confirmed or disconfirmed. Without this law, no test has a definite result. Denying it is self-contradictory — the denial is itself a P-or-not-P statement.</div>
+      </div>
+      <div class="law-card">
+        <div class="law-name">Principle of Sufficient Reason</div>
+        <div class="law-statement">"Every fact or truth has an explanation or reason why it is so."</div>
+        <div class="law-body">Science assumes events have causes and patterns have explanations. Without this, any result could be true for no reason, making argument impossible. Denying it is self-defeating — your denial would itself be a claim true for no reason.</div>
+      </div>
+      <div style="padding:13px 16px;border:1px solid var(--accent2);border-radius:5px;background:var(--accent-glow);margin-top:4px;">
+        <div style="font-family:'Crimson Pro',serif;font-style:italic;font-size:0.96rem;color:var(--accent);line-height:1.65;">To deny these principles because they are not scientifically proven is to deny the framework that makes science possible. Denying logic in the name of science is science betraying itself.</div>
+      </div>
+    </div>
+  </div>
+  <div class="section-right">
+    <div class="right-label">The hierarchy</div>
+    <div class="rcard"><div class="rcard-header">Logic grounds science</div><div class="rcard-body" style="font-family:'Crimson Pro',serif;font-size:0.87rem;color:var(--text-muted);line-height:1.6;">Science is a method that applies logical inference to empirical observations. Remove logic and science collapses. Logic is therefore not subordinate to science — it is prior to it.</div></div>
+    <div class="rcard"><div class="rcard-header">What logic can reach</div><div class="rcard-body" style="font-family:'Crimson Pro',serif;font-size:0.87rem;color:var(--text-muted);line-height:1.6;">Physics describes from within. Logic can reason about existence itself — including whether existence requires a cause. When physics hits the wall at t = 0, logic keeps going.</div></div>
+    <div class="rcard"><div class="rcard-header">The self-refuting denial</div><div class="rcard-body" style="font-family:'Crimson Pro',serif;font-size:0.87rem;color:var(--text-muted);line-height:1.6;">Any argument against the laws of logic must use those laws to construct itself. This is not a coincidence — it is why they cannot be denied without contradiction.</div></div>
+  </div>
+</section>
+
+<!-- S8 -->
+<section class="section" id="s8">
+  <div class="section-left">
+    <div class="section-number">08 / 09</div>
+    <h2>The Fork in the Road</h2>
+    <div class="prose">
+      <p>The inquiry arrives at a genuine fork. Neither path is ruled out by science — this is expected, because science cannot speak to what lies outside its own domain. But the two paths are not equally positioned when evaluated by logic alone.</p>
+      <p>One path follows the principle of sufficient reason to its conclusion. Every contingent thing — every thing that might not have existed, or might have been different — requires an explanation in something prior. The chain cannot regress infinitely through contingent causes; an infinite regress of contingent explanations does not produce an explanation, it merely defers one forever. Therefore something exists that is not contingent: something whose existence is not dependent on anything prior, something that cannot fail to exist. This is what philosophers call the necessary being. The argument doesn't specify its nature — only that it must exist, and that it must be sufficient to explain all contingent existence.</p>
+
+      <p class="q-lead">But why can't the laws of physics themselves just be a brute fact — existing without explanation? Why must there be something beyond them?</p>
+      <p>They can be — and that is the second path. It is logically coherent in the sense that it produces no immediate contradiction. But it pays a price: the most fundamental question — why is there something rather than nothing? — is declared unanswerable. Not because we haven't found the answer, but because there is nothing to find. Rationality is not reaching a terminus here. It is being withdrawn. The principle of sufficient reason, which underlies all causal reasoning and all science, is suspended precisely where it matters most.</p>
+      <p>Both are philosophical commitments. The difference is what each does with the demand for explanation: one honours it to its terminus; the other withdraws it.</p>
+    </div>
+    <div class="interactive">
+      <div class="panel">
+        <div class="panel-header">
+          <div class="panel-dot dot-red"></div><div class="panel-dot dot-yellow"></div><div class="panel-dot dot-green"></div>
+          <span class="panel-title">Two paths — select one to examine</span>
+        </div>
+        <div class="panel-body">
+          <div class="fork-wrap">
+            <div class="fork-card" id="fork-a" onclick="chooseFork('a')">
+              <div class="fork-label">Path A</div>
+              <div class="fork-title">The Necessary Cause</div>
+              <div class="fork-body">Every contingent fact has a cause. The chain cannot regress infinitely. Something uncaused and necessary must exist — sufficient to explain all contingent existence.</div>
+              <div class="fork-result">→ Requires a cause outside space-time whose existence is self-explanatory. The principle of sufficient reason is honoured to its terminus.</div>
+            </div>
+            <div class="fork-card" id="fork-b" onclick="chooseFork('b')">
+              <div class="fork-label">Path B</div>
+              <div class="fork-title">The Brute Fact</div>
+              <div class="fork-body">The laws of physics, the mathematical structure, the multiverse — they simply exist. No further explanation is available or required. The chain stops here.</div>
+              <div class="fork-result">→ Requires suspending the principle of sufficient reason at the deepest level — the very level where science can no longer help.</div>
+            </div>
+          </div>
+          <div id="fork-note" style="margin-top:11px;font-family:'Crimson Pro',serif;font-style:italic;font-size:0.92rem;color:var(--text-muted);opacity:0;transition:opacity 0.4s;line-height:1.65;padding:11px 13px;border:1px solid var(--border);border-radius:4px;background:var(--surface2);"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="section-right">
+    <div class="right-label">What each path demands</div>
+    <div class="rcard"><div class="rcard-header">Path A demands</div><div class="rcard-body" style="font-family:'Crimson Pro',serif;font-size:0.87rem;color:var(--text-muted);line-height:1.6;">Accepting a necessary cause outside the causal chain. Science neither confirms nor denies it. Logic, however, leads there when the principle of sufficient reason is applied consistently.</div></div>
+    <div class="rcard"><div class="rcard-header">Path B demands</div><div class="rcard-body" style="font-family:'Crimson Pro',serif;font-size:0.87rem;color:var(--text-muted);line-height:1.6;">Accepting that the deepest question has been declared off-limits — not answered. The principle of sufficient reason is not proven false. It is abandoned at the very point it matters most.</div></div>
+    <div class="rcard"><div class="rcard-header">Common ground</div><div class="rcard-body" style="font-family:'Crimson Pro',serif;font-size:0.87rem;color:var(--text-muted);line-height:1.6;">Neither is a scientific stance. Both are philosophical commitments. The question is not which science supports — it is which is more consistent with the logic that makes rational thought possible.</div></div>
+  </div>
+</section>
+
+<!-- S9 -->
+<section class="section" id="s9">
+  <div class="section-left">
+    <div class="section-number">09 / 09</div>
+    <h2>Where Logic Leads</h2>
+    <div class="prose">
+      <p>Science is constrained to the observable. Logic is not. When the question is why there is something rather than nothing, physics takes us to the edge and then hits a wall. What lies beyond the wall is not a scientific question. It is a question for logic — which is not built on science, but which science is built on.</p>
+
+      <p class="q-lead">But science being silent here doesn't mean logic has an answer. Shouldn't we simply say "we don't know" and leave it there?</p>
+      <p>Saying "we don't know" is honest. Saying "therefore there is no cause" or "therefore the question has no answer" is not — it is a conclusion smuggled in under the cover of humility. Ignorance of a cause is not the same as the absence of one. The two are not synonyms, and treating them as equivalent is not intellectual caution. It is abandoning the question while pretending to have answered it.</p>
+
+      <p class="q-lead">Perhaps the principle of sufficient reason simply doesn't have to apply everywhere — maybe some things just are.</p>
+      <p>Then you must choose where to suspend it — and you need a reason for that choice. If you suspend it at the level of physical laws, why not at the level of individual events? If some things can simply exist without explanation, what prevents any experimental result from being one of those things? The principle of sufficient reason is not an optional feature of rational inquiry. It is the condition under which rational inquiry is possible at all. Suspending it is not a scientific position. It is the dissolution of the framework within which science operates.</p>
+
+      <p>What reason compels, then, is this: the universe exists; its existence is contingent; contingent existence demands explanation; the chain of contingent causes cannot regress forever; therefore something necessary exists. The character of that necessary being is a further question — one that logic alone cannot resolve, and where other paths of inquiry begin. But the logical demand for a first cause is not a leap of faith. It is the terminus of a chain of reasoning that begins with the most modest observation possible — that there is something rather than nothing — and follows the principle of sufficient reason wherever it leads.</p>
+    </div>
+    <div style="max-width:600px;margin-top:38px;padding:22px 26px;border:1px solid var(--accent2);border-radius:6px;background:var(--accent-glow);">
+      <div style="font-family:'Crimson Pro',serif;font-size:1.08rem;color:var(--accent);line-height:1.72;font-style:italic;">Science is constrained to the observable, but logic is unconstrained. If we take logic seriously, the argument for a necessary cause of the universe is not just reasonable — it is, in a sense, unavoidable.</div>
+    </div>
+  </div>
+  <div class="section-right">
+    <div class="right-label">The two confusions to avoid</div>
+    <div class="rcard"><div class="rcard-header">Confusion 1</div><div class="rcard-body" style="font-family:'Crimson Pro',serif;font-size:0.87rem;color:var(--text-muted);line-height:1.6;">"We don't know the cause" ≠ "there is no cause." Ignorance of an explanation does not negate the existence of one. Science being silent is not science saying no.</div></div>
+    <div class="rcard"><div class="rcard-header">Confusion 2</div><div class="rcard-body" style="font-family:'Crimson Pro',serif;font-size:0.87rem;color:var(--text-muted);line-height:1.6;">"Causality is not scientifically proven" ≠ "causality can be denied." The principle of sufficient reason is a precondition of rational thought, not a hypothesis. Denying it dismantles the very tool you are using to deny it.</div></div>
+    <div class="rcard"><div class="rcard-header">What follows</div><div class="rcard-body" style="font-family:'Crimson Pro',serif;font-size:0.87rem;color:var(--text-muted);line-height:1.6;">The logical argument terminates in a necessary being. Its nature — whether personal, knowing, willing — is a further question. That is where theology, revelation, and other paths of inquiry begin.</div></div>
+  </div>
+</section>
+
+<!-- ═══ S10: Two Forms of PSR ═══ -->
+<section class="section" id="s10">
+  <div class="section-left">
+    <div class="section-number">10 / 15</div>
+    <h2>Two Ways of Demanding Explanation</h2>
+    <div class="prose">
+      <p>There is a principle so quietly embedded in scientific practice that almost no one names it: every event has an explanation. When a star collapses unexpectedly, we search for the cause. When an experiment produces a strange result, we assume something we haven't accounted for, not that nature acted without reason. This assumption — that facts have explanations — is what makes science possible. Without it, no result of any experiment would be trustworthy, because any outcome could be true for no reason at all. Call it the Principle of Sufficient Reason. In this form it is genuinely undeniable: the moment you deny it, you have already used it to construct the denial.</p>
+      <p>But there are two versions of this principle, and they are not the same. The one science uses is local: every event or fact within the universe has an explanation — causal, probabilistic, or lawful. It does not demand that the explanation be complete, or that the universe itself be explained. It asks "why?" about everything it encounters, and then stops at the boundary. Call this the weak form.</p>
+
+      <p class="q-lead">That seems enough. Science functions perfectly well with this. Why ask for more?</p>
+      <p>Consider what stopping at the boundary actually means. The weak form applies the demand for explanation to every fact without exception — and then, at the moment it reaches the most fundamental fact of all, it stops. Not because an argument was made showing that this fact is different in kind. Not because a careful analysis revealed that the universe is exempt. It stops because the universe is where physics ends, and physics is the only tool in hand. That is a limit on our instruments. It says nothing about whether an explanation exists.</p>
+      <p>There is a second form of the principle that refuses this stopping point. It says: every fact whatsoever — including the existence and structure of the universe — has a sufficient reason that fully accounts for it. Leibniz held this, and pressed it to its conclusion: if there is something rather than nothing, there must be a reason why — a reason that could not have been otherwise. Einstein expressed the same intuition when he said "God does not play dice with the universe." His resistance to quantum indeterminacy was not aesthetic preference. He could not accept that a uranium atom decays at 3:00 PM for absolutely no reason — not even a hidden one. He thought quantum mechanics must be incomplete. Nature, for Einstein, was not permitted to be brute.</p>
+      <p>Drag the slider below to see exactly where one form ends and the other begins.</p>
+    </div>
+    <div class="interactive">
+      <div class="panel">
+        <div class="panel-header">
+          <div class="panel-dot dot-red"></div><div class="panel-dot dot-yellow"></div><div class="panel-dot dot-green"></div>
+          <span class="panel-title">The spectrum of PSR commitment</span>
+        </div>
+        <div class="panel-body">
+          <div class="slider-row" style="margin-bottom:16px;">
+            <span class="slider-label" style="min-width:0;font-size:11px;color:var(--green);">Weak PSR</span>
+            <input type="range" min="0" max="4" value="1" step="1" oninput="updatePSRSlider()" id="psr-slider">
+            <span class="slider-label" style="min-width:0;font-size:11px;color:var(--blue);text-align:right;">Strong PSR</span>
+          </div>
+          <div style="margin-bottom:10px;">
+            <div style="height:4px;background:var(--border);border-radius:2px;overflow:hidden;margin-bottom:12px;"><div id="psr-bar" style="height:100%;width:25%;background:var(--green);transition:all 0.4s;border-radius:2px;"></div></div>
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px;">
+              <div style="flex:1;">
+                <div id="psr-zone" style="font-family:'Space Grotesk',sans-serif;font-size:9px;letter-spacing:0.2em;text-transform:uppercase;margin-bottom:5px;"></div>
+                <div id="psr-label" style="font-family:'Crimson Pro',serif;font-size:1.05rem;color:#e0dbd2;margin-bottom:5px;"></div>
+                <div id="psr-desc" style="font-family:'Crimson Pro',serif;font-size:0.88rem;color:var(--text-muted);line-height:1.55;"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="section-right">
+    <div class="right-label">Side by side</div>
+    <div class="rcard">
+      <div class="rcard-header">Weak PSR</div>
+      <div class="rcard-body" style="font-family:'Crimson Pro',serif;font-size:0.87rem;color:var(--text-muted);line-height:1.6;">Every event or fact <em>within the universe</em> has an explanation — causal, probabilistic, or lawful. Brute facts are acceptable at the foundation. Science can proceed with quantum randomness. The universe itself need not be explained.</div>
+    </div>
+    <div class="rcard">
+      <div class="rcard-header">Strong PSR</div>
+      <div class="rcard-body" style="font-family:'Crimson Pro',serif;font-size:0.87rem;color:var(--text-muted);line-height:1.6;">Every fact whatsoever — including contingent facts and the existence of the universe itself — has a sufficient reason that fully accounts for it. No brute facts anywhere. Associated with Leibniz, Spinoza, and in the quantum context, Einstein.</div>
+    </div>
+    <div class="rcard">
+      <div class="rcard-header">Einstein's version</div>
+      <div class="rcard-body" style="font-family:'Crimson Pro',serif;font-style:italic;font-size:0.86rem;color:var(--text-muted);line-height:1.6;">"God does not play dice." — Einstein resisted quantum indeterminacy not for aesthetic reasons but because he believed even a quantum event at 3:00 PM has a sufficient reason, even if we haven't found it. He thought quantum mechanics was incomplete, not that nature was brute.</div>
+    </div>
+    <div class="rcard">
+      <div class="rcard-header">The hierarchy</div>
+      <div class="rcard-body" style="font-family:'Space Mono',monospace;font-size:10px;color:var(--text-dim);line-height:1.9;">1. Logical laws — undeniable<br>2. Weak PSR — presupposed by science<br>3. Strong PSR — metaphysical commitment<br><br><span style="color:var(--accent)">The question: can weak PSR hold its ground without collapsing into strong?</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ S11: The Exception Problem ═══ -->
+<section class="section" id="s11">
+  <div class="section-left">
+    <div class="section-number">11 / 15</div>
+    <h2>The Exception That Has No Argument</h2>
+    <div class="prose">
+      <p>Science never accepts a brute fact as a final answer. When a measurement doesn't fit the model, researchers don't write "unexplained — brute fact" in the margin and move on. They propose new models, search for hidden variables, assume that something is missing from the picture. The demand for explanation is not switched on selectively. It runs continuously, applied to every phenomenon without exception — until one.</p>
+
+      <p class="q-lead">But there has to be a stopping point somewhere. You can't explain everything — at some level you just have to accept that something is.</p>
+      <p>That is true. The question is where the stopping point is, and why. The weak form of the principle stops at the universe itself: the laws of physics, the initial conditions, the fact that there is a universe at all — these are declared to require no explanation. But what is the argument for stopping precisely here? Not: what makes it comfortable to stop here. What makes it principled?</p>
+      <p>The stopping point is drawn at the boundary of physics. Physics cannot describe what lies before the singularity, so the habit of explanation stops there too. But the boundary of physics is an epistemic boundary — it tells us where our current equations break down. It says nothing about whether an explanation exists beyond it. We cannot observe the interior of a black hole either. We do not conclude from that inability that black hole interiors are brute facts. We infer, model, reason beyond the reach of direct observation. The limit of the instrument is not the limit of the question.</p>
+
+      <p class="q-lead">Still, maybe the universe is genuinely different — it is the totality of everything, so there is simply nothing outside it to serve as an explanation.</p>
+      <p>That is a substantive philosophical claim, and it may be correct. But notice that it is a claim — one that needs to be argued and defended, not assumed. To say "there is nothing outside the universe to serve as an explanation" is not the same as saying "no explanation is required." It is one possible answer to the question of what the explanation is. The weak form does not make this argument. It does not conclude that the universe is inexplicable after careful analysis. It simply stops asking. And a principle of explanation that stops asking at the most important case, without argument, is not a principle. It is a habit with a ceiling.</p>
+    </div>
+    <div class="interactive">
+      <div class="panel">
+        <div class="panel-header">
+          <div class="panel-dot dot-red"></div><div class="panel-dot dot-yellow"></div><div class="panel-dot dot-green"></div>
+          <span class="panel-title">The anti-exception principle</span>
+        </div>
+        <div class="panel-body">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px;">
+            <div style="border:1px solid rgba(74,171,122,0.3);border-radius:5px;padding:12px;background:var(--green-dim);">
+              <div style="font-family:'Space Grotesk',sans-serif;font-size:9px;letter-spacing:0.2em;color:var(--green);margin-bottom:6px;">INSIDE THE UNIVERSE</div>
+              <div style="font-family:'Crimson Pro',serif;font-size:0.87rem;color:var(--text-muted);line-height:1.55;">Every fact requires explanation. Scientists search for causes even before finding them. Brute facts are not accepted — they are treated as temporary gaps.</div>
+            </div>
+            <div style="border:1px solid rgba(201,107,91,0.3);border-radius:5px;padding:12px;background:var(--red-dim);">
+              <div style="font-family:'Space Grotesk',sans-serif;font-size:9px;letter-spacing:0.2em;color:var(--red);margin-bottom:6px;">THE UNIVERSE ITSELF</div>
+              <div style="font-family:'Crimson Pro',serif;font-size:0.87rem;color:var(--text-muted);line-height:1.55;">Weak PSR stops here. No explanation demanded. The most fundamental fact of all is the one that gets exempted — without argument.</div>
+            </div>
+          </div>
+          <div style="padding:12px 14px;border:1px solid var(--accent2);border-radius:5px;background:var(--accent-glow);">
+            <div style="font-family:'Crimson Pro',serif;font-style:italic;font-size:0.95rem;color:var(--accent);line-height:1.65;">A principle that applies everywhere except the most important case has abandoned its own commitment. The exemption is not a conclusion. It is a ceiling — drawn arbitrarily, at the boundary of convenience.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="section-right">
+    <div class="right-label">The structure of the problem</div>
+    <div class="rcard">
+      <div class="rcard-header">What weak PSR does</div>
+      <div class="rcard-body" style="font-family:'Space Mono',monospace;font-size:10px;color:var(--text-dim);line-height:1.9;">∀ facts inside universe → explain<br>Universe itself → exempt<br><br><span style="color:var(--red)">On what principle?</span></div>
+    </div>
+    <div class="rcard">
+      <div class="rcard-header">Why "limits of inquiry" doesn't work</div>
+      <div class="rcard-body" style="font-family:'Crimson Pro',serif;font-size:0.87rem;color:var(--text-muted);line-height:1.6;">Limits of inquiry are epistemic — about what we can observe. The question of whether an explanation exists is metaphysical. We can't observe the cause of a black hole's interior either. We still don't call it a brute fact.</div>
+    </div>
+    <div class="rcard">
+      <div class="rcard-header">What arbitrariness means here</div>
+      <div class="rcard-body" style="font-family:'Crimson Pro',serif;font-size:0.87rem;color:var(--text-muted);line-height:1.6;">The boundary is not principled — it is merely drawn at the edge of physics. "We can't measure beyond here" is a fact about our instruments. It is not a fact about whether explanation is required.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ S12: Self-Undermining ═══ -->
+<section class="section" id="s12">
+  <div class="section-left">
+    <div class="section-number">12 / 15</div>
+    <h2>A Principle That Cannot Justify Its Own Stopping Point</h2>
+    <div class="prose">
+      <p>Here is a question the weak form of the principle cannot answer: on what basis do we distinguish between facts that require explanation and facts that don't? There must be a rule. Otherwise the distinction is arbitrary — and if it is arbitrary, then there is no reason why the stopping point couldn't be drawn somewhere else entirely. Why not declare the laws of thermodynamics a brute fact, and stop explaining heat? Why not declare the outcome of any particular experiment a brute fact, and stop doing physics? The weak form offers no principled answer. Its only implied rule is: stop at the universe. But that is a location, not a criterion.</p>
+
+      <p class="q-lead">The criterion is simple — we stop where the tools of science stop. Beyond the singularity, physics cannot reach. That is where explanation ends.</p>
+      <p>That conflates two different boundaries. Physics stops at the singularity because its equations become undefined there — because the mathematical framework breaks down, not because the question of explanation becomes meaningless. "Why does the universe exist?" was never a question within physics. It is structurally prior to physics: physics already assumes the existence of the universe, its laws, and its mathematical structure in order to get started at all. The question cannot be answered from inside the system it is asking about. Saying "physics can't answer this, so there is no answer" is like saying a ruler cannot measure the length of the ruler itself, therefore the ruler has no length.</p>
+      <p>Now consider what it means to allow brute facts at the foundation. The weak form depends on explanation being a trustworthy activity — on the assumption that when we ask "why?" and reason toward an answer, the answer tracks something real about the world. But if the foundation of the world is allowed to be fundamentally inexplicable, what guarantees that the structure of logic isn't also a brute accident? That the reliability of inference isn't arbitrary? The weak form uses the practice of reason to do science, while allowing that practice to rest on nothing at the deepest level. It borrows the credibility of explanation and then refuses to extend that credibility to the one case where it matters most.</p>
+
+      <p class="q-lead">But science works. If the foundation were truly arbitrary, surely science would fail — and it doesn't.</p>
+      <p>Science working is not evidence that the foundation is non-arbitrary. It is evidence that, locally, within the universe, patterns hold. Whether those patterns are grounded in something necessary, or are themselves a cosmic accident that happens to be stable, is exactly the question the weak form declines to ask. Science cannot settle its own foundations by pointing to its own success. That would be circular. The question of whether the ground under science is solid is not a scientific question. It is prior to science — and declining to ask it is not the same as answering it.</p>
+    </div>
+    <div class="interactive">
+      <div class="panel">
+        <div class="panel-header">
+          <div class="panel-dot dot-red"></div><div class="panel-dot dot-yellow"></div><div class="panel-dot dot-green"></div>
+          <span class="panel-title">The self-undermining structure of weak PSR</span>
+        </div>
+        <div class="panel-body">
+          <div class="chain" id="ig-chain">
+            <div class="ig-node chain-node" onclick="litIG(0)"><div class="chain-icon">1</div><div class="chain-text"><b>Weak PSR presupposes</b> that facts are, in general, explainable — that explanation is a meaningful activity.</div></div>
+            <div class="ig-node chain-node" onclick="litIG(1)"><div class="chain-icon">2</div><div class="chain-text"><b>But weak PSR allows</b> brute facts at the foundation — the laws of physics, the universe's existence — could be completely inexplicable.</div></div>
+            <div class="ig-node chain-node" onclick="litIG(2)"><div class="chain-icon">3</div><div class="chain-text"><b>If the foundation is brute,</b> why trust that the structure of logic or the reliability of reasoning is not also brute? What guarantees local intelligibility?</div></div>
+            <div class="ig-node chain-node" onclick="litIG(3)"><div class="chain-icon">4</div><div class="chain-text"><b>Weak PSR provides no boundary rule.</b> It cannot specify, on principle, which facts get explanations and which don't. The only rule is: stop at the universe. That is not a principle — it is a location.</div></div>
+            <div class="ig-node chain-node question" onclick="litIG(4)"><div class="chain-icon">↯</div><div class="chain-text"><b>Therefore:</b> weak PSR uses explanation while denying its ultimate necessity. It is epistemically fragile — not contradictory, but unable to fully justify its own practice.</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="section-right">
+    <div class="right-label">The asymmetry problem</div>
+    <div class="rcard">
+      <div class="rcard-header">Weak PSR's implicit claim</div>
+      <div class="rcard-body" style="font-family:'Space Mono',monospace;font-size:10px;color:var(--text-dim);line-height:1.9;">Inside reality:<br>→ explanation required<br><br>At the foundation:<br>→ explanation optional<br><br><span style="color:var(--red)">Why does explanation apply in one domain but not the other?</span></div>
+    </div>
+    <div class="rcard">
+      <div class="rcard-header">The boundary problem</div>
+      <div class="rcard-body" style="font-family:'Crimson Pro',serif;font-size:0.87rem;color:var(--text-muted);line-height:1.6;">If the boundary between "needs explanation" and "doesn't need explanation" is itself unexplained, then the weak PSR applies brute facts to its own rule. The exemption has no justification — which is itself a kind of brute fact.</div>
+    </div>
+    <div class="rcard">
+      <div class="rcard-header">What strong PSR stabilises</div>
+      <div class="rcard-body" style="font-family:'Crimson Pro',serif;font-size:0.87rem;color:var(--text-muted);line-height:1.6;">Strong PSR says explanation is not a local tool — it is fundamental. No arbitrary stopping points. No unexplained foundations. This preserves the coherence of the demand for reasons that makes science possible in the first place.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ S13: Dark Matter ═══ -->
+<section class="section" id="s13">
+  <div class="section-left">
+    <div class="section-number">13 / 15</div>
+    <h2>The Method Physicists Use Every Day</h2>
+    <div class="prose">
+      <p>Dark matter has never been directly detected. No instrument has captured a dark matter particle. What physicists observe are effects: galaxies rotating at speeds that the visible mass cannot account for, gravitational lensing stronger than it should be, large-scale cosmic structure that would not have formed without something holding it together. From those effects, scientists infer an unseen cause. They do not say "the galaxy rotates that way for no reason." They say "there must be something we have not yet found." The inference is not tentative speculation — it is treated as one of the firmest conclusions in contemporary cosmology.</p>
+
+      <p class="q-lead">But that is an inference within physics, about a physical entity. Inferring a cause outside the universe is a completely different kind of move.</p>
+      <p>The domain is different. The logical structure of the inference is identical. In both cases, observed facts cannot be made coherent without positing an unobserved cause. In both cases, the cause is inferred from its effects rather than detected directly. In both cases, the inference is driven by the demand that the observations be explicable — that there be a reason for what we see. The only thing that differs is where the cause is located. Dark matter is within the universe, so the inference is called physics. A necessary cause is outside the universe, so the inference is called metaphysics. But that distinction is about domain, not method. And the decision to accept inference in one domain while rejecting it in another is not itself a scientific decision. It is a philosophical one.</p>
+      <p>Physicists do not say dark matter is one hypothesis among many equally plausible options. They say the observations demand it. The same structure applies here: a contingent universe — one that could have been otherwise, or not existed at all — demands a sufficient reason for its existence. That reason cannot itself be contingent, or the same question simply re-opens one level up. The inference to a non-contingent cause follows by the same logic that makes dark matter necessary: the observations don't make sense without it. The discomfort is not with the method. It is with the destination.</p>
+    </div>
+    <div class="interactive">
+      <div class="panel">
+        <div class="panel-header">
+          <div class="panel-dot dot-red"></div><div class="panel-dot dot-yellow"></div><div class="panel-dot dot-green"></div>
+          <span class="panel-title">The inference compared</span>
+        </div>
+        <div class="panel-body">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px;">
+            <div style="border:1px solid rgba(91,141,217,0.3);border-radius:5px;padding:13px;background:var(--blue-dim);">
+              <div style="font-family:'Space Grotesk',sans-serif;font-size:9px;letter-spacing:0.2em;color:var(--blue);margin-bottom:7px;">DARK MATTER</div>
+              <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--text-dim);line-height:1.8;">Observed: galaxy rotation wrong<br>Inferred: unseen mass must exist<br>Status: <span style="color:var(--green)">accepted science</span></div>
+            </div>
+            <div style="border:1px solid rgba(201,166,107,0.3);border-radius:5px;padding:13px;background:var(--accent-glow);">
+              <div style="font-family:'Space Grotesk',sans-serif;font-size:9px;letter-spacing:0.2em;color:var(--accent);margin-bottom:7px;">NECESSARY CAUSE</div>
+              <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--text-dim);line-height:1.8;">Observed: universe exists, contingent<br>Inferred: non-contingent cause<br>Status: <span style="color:var(--accent)">same method, different domain</span></div>
+            </div>
+          </div>
+          <div style="border:1px solid var(--border);border-radius:5px;padding:12px;background:var(--surface2);">
+            <div style="font-family:'Space Grotesk',sans-serif;font-size:9px;letter-spacing:0.2em;color:var(--text-dim);margin-bottom:7px;">THE LOGICAL STRUCTURE (IDENTICAL)</div>
+            <div style="font-family:'Space Mono',monospace;font-size:11px;color:var(--text-muted);line-height:1.8;">visible effects don't make sense<br>→ unseen cause must exist<br>→ cause inferred from necessity of explanation</div>
+          </div>
+          <div style="margin-top:10px;font-family:'Crimson Pro',serif;font-style:italic;font-size:0.9rem;color:var(--text-muted);line-height:1.6;">The difference is not the method. It is the domain. And the decision about which domains get the benefit of rational inference is not scientific — it is philosophical.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="section-right">
+    <div class="right-label">What this shows</div>
+    <div class="rcard">
+      <div class="rcard-header">Inference is the method</div>
+      <div class="rcard-body" style="font-family:'Crimson Pro',serif;font-size:0.87rem;color:var(--text-muted);line-height:1.6;">Scientists accept dark matter, gravitational waves, black holes, and the Big Bang itself — all inferred from effects, not directly observed. Inference from effect to cause is not speculation. It is the core of rational explanation.</div>
+    </div>
+    <div class="rcard">
+      <div class="rcard-header">The inconsistency</div>
+      <div class="rcard-body" style="font-family:'Crimson Pro',serif;font-size:0.87rem;color:var(--text-muted);line-height:1.6;">Accepting inference within physics but rejecting it at the origin of physics is not a principled difference. It is a domain preference dressed as a methodological principle. The method is the same. Only the comfort level differs.</div>
+    </div>
+    <div class="rcard">
+      <div class="rcard-header">Dark matter is necessary</div>
+      <div class="rcard-body" style="font-family:'Crimson Pro',serif;font-size:0.87rem;color:var(--text-muted);line-height:1.6;">Physicists don't say "dark matter is one option among others." They say "observations don't make sense without it." Exactly. And the universe's existence doesn't make sense without a non-contingent cause — for the same structural reason.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ S14: Intelligibility ═══ -->
+<section class="section" id="s14">
+  <div class="section-left">
+    <div class="section-number">14 / 15</div>
+    <h2>The Denial That Cannot Stand on Its Own</h2>
+    <div class="prose">
+      <p>Suppose someone grants everything above but still wants to hold their ground. They say: reality, at its deepest level, simply is. There is no further explanation. Some things just exist, and that is acceptable. This is not a contradiction. It is a coherent position — and it is the position the weak form of the principle implicitly rests on.</p>
+
+      <p class="q-lead">That seems honest. Isn't it more intellectually humble to admit there might be no ultimate explanation than to insist there must be one?</p>
+      <p>Ask a different question: what is the status of the claim "some things have no explanation"? Is that claim itself something that has a reason — a basis in evidence, logic, or argument? Or does it have no reason either? There are only two options. If the claim has a reason, then it participates in the very framework of intelligibility it is trying to deny. Reason is already at work in the denial. The principle being refused is already operative in the act of refusing it. If the claim has no reason — if it is simply asserted, without argument, as a brute declaration — then it carries no rational weight. It is indistinguishable from noise. A position that cannot be given reasons for is not a philosophical stance. It is a sound.</p>
+      <p>This is not saying the claim is self-contradictory. It is not. It is saying something more precise: the claim cannot be made as a rational argument without already presupposing the framework it is trying to reject. Any argument, on any topic, presupposes that concepts have stable meaning, that statements can be true or false, and that reasons support conclusions. These are not scientific assumptions — they are the preconditions of thought itself. To argue that not everything is intelligible is already to assume that argument is intelligible, that the claim being made has meaning, and that the reasons given for it count. The denial of intelligibility either relies on intelligibility or it has no force.</p>
+
+      <p class="q-lead">Isn't this just wordplay? The brute fact position doesn't need to argue for itself — it just accepts that some things are unexplained.</p>
+      <p>If it does not argue for itself, it cannot ask to be taken seriously as a philosophical position. A claim that neither needs reasons nor offers them is not humble — it is inert. The moment it enters a conversation, it borrows the currency of rational discourse: it asserts something, it implies that the assertion is true rather than false, it expects the listener to weigh it. All of that is intelligibility. There is no way to say "not everything needs an explanation" from outside the practice of explanation. The denial of the strong form of the principle is not coherently available as a reasoned conclusion. It is only available as a decision to stop reasoning — and decisions to stop reasoning do not refute arguments. They evade them.</p>
+    </div>
+    <div class="interactive">
+      <div class="panel">
+        <div class="panel-header">
+          <div class="panel-dot dot-red"></div><div class="panel-dot dot-yellow"></div><div class="panel-dot dot-green"></div>
+          <span class="panel-title">The self-defeating denial — click to trace</span>
+        </div>
+        <div class="panel-body">
+          <div class="chain" id="chain2">
+            <div class="chain-node" onclick="litNode2(0)"><div class="chain-icon">①</div><div class="chain-text"><b>Claim:</b> "Not everything is intelligible — some things have no reason."</div></div>
+            <div class="chain-node" onclick="litNode2(1)"><div class="chain-icon">②</div><div class="chain-text"><b>Ask:</b> does that claim itself have a reason? Is it based on evidence, logic, argument?</div></div>
+            <div class="chain-node" onclick="litNode2(2)"><div class="chain-icon">A</div><div class="chain-text"><b>If yes:</b> the claim participates in intelligibility. Reason is already operating in the denial. The principle being denied is being used to deny it.</div></div>
+            <div class="chain-node" onclick="litNode2(3)"><div class="chain-icon">B</div><div class="chain-text"><b>If no:</b> the claim has no reason. It is arbitrary — indistinguishable from noise. We have no rational ground to accept it.</div></div>
+            <div class="chain-node question" onclick="litNode2(4)"><div class="chain-icon">↯</div><div class="chain-text"><b>Therefore:</b> the denial of intelligibility either uses intelligibility or destroys itself. Intelligibility cannot be coherently denied — it is a presupposition of rational thought itself.</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="section-right">
+    <div class="right-label">What intelligibility means here</div>
+    <div class="rcard">
+      <div class="rcard-header">What we are claiming</div>
+      <div class="rcard-body" style="font-family:'Crimson Pro',serif;font-size:0.87rem;color:var(--text-muted);line-height:1.6;">Not that we currently understand everything. Not that human knowledge has no limits. But that reality is, in principle, understandable through reasons and explanations. That is a structural claim about reality — not about our cognitive reach.</div>
+    </div>
+    <div class="rcard">
+      <div class="rcard-header">The unavoidable starting point</div>
+      <div class="rcard-body" style="font-family:'Crimson Pro',serif;font-size:0.87rem;color:var(--text-muted);line-height:1.6;">Any argument — literally any — presupposes that concepts have stable meaning, statements can be true or false, and reasons support conclusions. That is already an appeal to intelligibility. To argue anything is to assume reality can be understood.</div>
+    </div>
+    <div class="rcard">
+      <div class="rcard-header">The distinction that matters</div>
+      <div class="rcard-body" style="font-family:'Crimson Pro',serif;font-size:0.87rem;color:var(--text-muted);line-height:1.6;">Intelligibility is not just a preference or habit of science. It is a precondition of reasoning itself. Denying it at the foundation of reality undermines the very act of making that denial.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ S15: Strong PSR Necessary ═══ -->
+<section class="section" id="s15">
+  <div class="section-left">
+    <div class="section-number">15 / 15</div>
+    <h2>Where the Demand for Explanation Leads</h2>
+    <div class="prose">
+      <p>The weak form of the principle asks "why?" about everything it encounters — every event, every pattern, every law — and then, at the boundary, stops. Not because a careful argument showed that the universe is exempt. Because the tools run out there. The strong form refuses that stopping point: if explanation is a genuine demand of reason and not merely a tool of physics, it cannot have a ceiling drawn at the edge of what physics can measure. The question is which of these positions can be held consistently.</p>
+
+      <p class="q-lead">The weak form is still logically consistent. Nothing forces a move to the strong form. Why should the stronger commitment be preferred?</p>
+      <p>Logical consistency is a minimum condition, not a sufficient one. A position can be consistent and still be unable to justify its own practice. The weak form depends on explanation being trustworthy — on the assumption that asking "why?" and reasoning toward an answer is a meaningful activity that tracks reality. But it allows that assumption to rest on nothing at the deepest level. The foundation of the world, on this view, could be a brute accident. And if the foundation could be a brute accident, there is no principled reason why the reliability of logic, the stability of physical laws, or the validity of inference couldn't also be accidents. The weak form borrows the credibility of the demand for reasons to do all of its work, and then refuses to extend that credibility to the one question where it would lead somewhere uncomfortable. That refusal cannot be made into a principle. It is a preference for stopping.</p>
+      <p>The strong form does not require that we can currently explain everything. It requires only that everything has an explanation — that reality is, in principle, intelligible all the way down. This is not an empirical claim. It is a commitment about the structure of reality. And it is a commitment that rational inquiry cannot coherently abandon, because any argument against it must already rely on it.</p>
+
+      <p class="q-lead">So what follows from the strong form?</p>
+      <p>If every fact has a sufficient reason, then the existence of a contingent universe has a sufficient reason. That reason cannot itself be contingent — a contingent explanation only passes the question one level up, and the regress that results explains nothing, it only defers. The sufficient reason for a contingent universe must be something whose existence is not dependent on anything prior: something that exists necessarily, that could not have failed to exist, that is the non-contingent ground of all contingent things. This is what the previous chapter reached through the causality argument. The strong form of the principle arrives at the same destination through a different route — not by tracing the chain of causes backward, but by pressing the demand for explanation forward until it can rest on something that does not need to be explained by anything further. That something is not a hypothesis. It is what the commitment to explanation requires.</p>
+    </div>
+    <div class="interactive">
+      <div class="panel">
+        <div class="panel-header">
+          <div class="panel-dot dot-red"></div><div class="panel-dot dot-yellow"></div><div class="panel-dot dot-green"></div>
+          <span class="panel-title">The full transition — step through the argument</span>
+        </div>
+        <div class="panel-body">
+          <div style="margin-bottom:14px;">
+            <div style="height:3px;background:var(--border);border-radius:2px;overflow:hidden;margin-bottom:10px;"><div id="step-bar" style="height:100%;width:12.5%;background:var(--green);transition:all 0.4s;border-radius:2px;"></div></div>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+              <span id="step-num" style="font-family:'Space Mono',monospace;font-size:10px;color:var(--text-dim);">1 / 8</span>
+              <div style="display:flex;gap:8px;">
+                <button id="step-prev" onclick="updateStep(-1)" style="font-family:'Space Grotesk',sans-serif;font-size:11px;color:var(--text-muted);border:1px solid var(--border2);background:var(--surface2);padding:5px 12px;border-radius:3px;cursor:pointer;" disabled>← Prev</button>
+                <button id="step-next" onclick="updateStep(1)" style="font-family:'Space Grotesk',sans-serif;font-size:11px;color:var(--accent);border:1px solid var(--accent2);background:var(--accent-glow);padding:5px 12px;border-radius:3px;cursor:pointer;">Next →</button>
+              </div>
+            </div>
+            <div style="border:1px solid var(--border2);border-radius:6px;padding:16px;background:var(--surface2);min-height:90px;">
+              <div id="step-title" style="font-family:'Crimson Pro',serif;font-size:1.05rem;color:#e0dbd2;margin-bottom:8px;"></div>
+              <div id="step-body" style="font-family:'Crimson Pro',serif;font-size:0.9rem;color:var(--text-muted);line-height:1.6;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="max-width:600px;margin-top:38px;padding:22px 26px;border:1px solid var(--accent2);border-radius:6px;background:var(--accent-glow);">
+      <div style="font-family:'Space Grotesk',sans-serif;font-size:9px;letter-spacing:0.25em;text-transform:uppercase;color:var(--accent);margin-bottom:10px;">Where reason arrives</div>
+      <div style="font-family:'Crimson Pro',serif;font-size:1.08rem;color:var(--accent);line-height:1.72;font-style:italic;">The demand for explanation cannot stop at the boundary of the universe without abandoning the very principle that makes explanation trustworthy. Followed without arbitrary stopping points, it arrives at something necessary — a cause whose existence requires no further cause.</div>
+    </div>
+  </div>
+  <div class="section-right">
+    <div class="right-label">The verdict</div>
+    <div class="rcard">
+      <div class="rcard-header">Weak PSR — epistemically fragile</div>
+      <div class="rcard-body" style="font-family:'Space Mono',monospace;font-size:10px;color:var(--text-dim);line-height:1.8;">✓ Logically consistent<br>✓ Science can function<br>✗ No principled stopping rule<br>✗ Exempts most important fact<br>✗ Uses intelligibility to deny it</div>
+    </div>
+    <div class="rcard">
+      <div class="rcard-header">Strong PSR — rationally privileged</div>
+      <div class="rcard-body" style="font-family:'Space Mono',monospace;font-size:10px;color:var(--text-dim);line-height:1.8;">✓ No arbitrary stopping points<br>✓ Preserves coherence of reason<br>✓ Applies PSR universally<br>→ Requires non-contingent cause<br>→ The journey continues</div>
+    </div>
+    <div class="rcard">
+      <div class="rcard-header">What comes next</div>
+      <div class="rcard-body" style="font-family:'Crimson Pro',serif;font-size:0.87rem;color:var(--text-muted);line-height:1.6;">Strong PSR establishes that the universe requires a non-contingent cause. What is the nature of that cause? Is it a force, a law, a mind? That is the next cluster — and it is where "necessary cause" begins its transformation into something more specific.</div>
+    </div>
+  </div>
+</section>
+
+</div>
+
+<script>
+function litNode2(i){ document.querySelectorAll('#chain2 .chain-node').forEach((n,j)=>{ n.classList.remove('lit'); if(j<=i) n.classList.add('lit'); }); }
+document.addEventListener('DOMContentLoaded',()=>{ updatePSRSlider(); updateStep(0); });
+
+// ── Two-chapter sidebar nav ──
+const chapters = [
+  {
+    track: 'nav-track-1',
+    title: 'On Existence',
+    badge: 'I · II',
+    sections: [
+      {id:'s1',label:'The Program'},
+      {id:'s2',label:'Fine-Tuning'},
+      {id:'s3',label:'Random Ranges'},
+      {id:'s4',label:'Anthropic'},
+      {id:'s5',label:'Before t = 0'},
+      {id:'s6',label:'Causality'},
+      {id:'s7',label:'Logic'},
+      {id:'s8',label:'The Fork'},
+      {id:'s9',label:'Conclusion'},
+    ]
+  },
+  {
+    track: 'nav-track-2',
+    title: 'On Reason',
+    badge: 'II · II',
+    sections: [
+      {id:'s10',label:'Two Forms of PSR'},
+      {id:'s11',label:'The Exception'},
+      {id:'s12',label:'Self-Undermining'},
+      {id:'s13',label:'Dark Matter'},
+      {id:'s14',label:'Intelligibility'},
+      {id:'s15',label:'Strong PSR'},
+    ]
+  }
+];
+
+// Build dots for both chapters
+chapters.forEach((ch, ci) => {
+  const track = document.getElementById(ch.track);
+  ch.sections.forEach((s, si) => {
+    const d = document.createElement('div');
+    d.className = 'nav-dot';
+    d.id = `dot-${ci}-${si}`;
+    d.innerHTML = `<div class="nav-dot-inner"></div><div class="nav-tooltip">${s.label}</div>`;
+    d.onclick = () => document.getElementById(s.id).scrollIntoView({behavior:'smooth'});
+    track.appendChild(d);
+  });
+});
+
+// All section elements flat list for scroll tracking
+const allSections = chapters.flatMap(ch => ch.sections.map(s => ({...s, el: document.getElementById(s.id)})));
+
+let currentChapter = 0;
+
+function switchChapter(ci) {
+  if (ci === currentChapter) return;
+  currentChapter = ci;
+  const ch = chapters[ci];
+
+  // Fade title + badge
+  const titleEl = document.getElementById('sidebar-title');
+  const badgeEl = document.getElementById('chapter-badge');
+  titleEl.style.opacity = '0';
+  badgeEl.style.opacity = '0';
+  setTimeout(() => {
+    titleEl.textContent = ch.title;
+    badgeEl.textContent = ch.badge;
+    titleEl.style.opacity = '1';
+    badgeEl.style.opacity = '1';
+  }, 220);
+
+  // Swap tracks
+  chapters.forEach((c, i) => {
+    const t = document.getElementById(c.track);
+    if (i === ci) t.classList.remove('hidden');
+    else t.classList.add('hidden');
+  });
+}
+
+window.addEventListener('scroll', () => {
+  const scrolled = window.scrollY, total = document.body.scrollHeight - window.innerHeight;
+  document.getElementById('progress-fill').style.width = Math.min(100, (scrolled / total) * 100) + '%';
+
+  // Find active section across all
+  let activeFlat = -1;
+  allSections.forEach((s, i) => {
+    if (s.el && s.el.getBoundingClientRect().top < window.innerHeight * 0.5) activeFlat = i;
+  });
+
+  // Determine which chapter the active section belongs to
+  let counted = 0;
+  chapters.forEach((ch, ci) => {
+    const chStart = counted;
+    const chEnd = counted + ch.sections.length - 1;
+    if (activeFlat >= chStart && activeFlat <= chEnd) switchChapter(ci);
+    counted += ch.sections.length;
+  });
+
+  // Update dots per chapter
+  chapters.forEach((ch, ci) => {
+    ch.sections.forEach((s, si) => {
+      const globalIdx = chapters.slice(0, ci).reduce((a, c) => a + c.sections.length, 0) + si;
+      const dot = document.getElementById(`dot-${ci}-${si}`);
+      if (!dot) return;
+      dot.classList.remove('active', 'visited');
+      if (globalIdx === activeFlat) dot.classList.add('active');
+      else if (globalIdx < activeFlat) dot.classList.add('visited');
+    });
+  });
+});
+
+// Visibility fade-in for sections
+const sections = allSections;
+const sectionEls = allSections.map(s => s.el);
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, {threshold: 0.05});
+document.querySelectorAll('.section-left,.section-right').forEach(el => io.observe(el));
+
+// S1 simulation
+let runCount=0,running=false,animId=null;
+const canvas=document.getElementById('universe-canvas');
+const ctx=canvas.getContext('2d');
+function resizeC(){ canvas.width=canvas.offsetWidth*(window.devicePixelRatio||1); canvas.height=170*(window.devicePixelRatio||1); ctx.scale(window.devicePixelRatio||1,window.devicePixelRatio||1); }
+resizeC(); window.addEventListener('resize',resizeC);
+let stars=[];
+const W=()=>canvas.width/(window.devicePixelRatio||1), H=()=>canvas.height/(window.devicePixelRatio||1);
+function initStars(){ stars=[]; for(let i=0;i<90;i++) stars.push({x:W()/2+(Math.random()-.5)*30,y:H()/2+(Math.random()-.5)*30,vx:(Math.random()-.5)*2.2,vy:(Math.random()-.5)*2.2,r:Math.random()*1.1+0.2}); }
+const outcomes=[{t:'fail',m:'collapse — gravity too high, runaway singularity'},{t:'fail',m:'void — expansion too fast, no structures formed'},{t:'fail',m:'inert — EM coupling prevents stable atoms'},{t:'success',m:'★ life-bearing conditions detected'},{t:'fail',m:'collapse — expansion rate too slow, early recollapse'}];
+function runSim(){
+  if(running)return; running=true; runCount++;
+  document.getElementById('run-count1').textContent='Attempts: '+runCount;
+  document.getElementById('run-btn1').disabled=true;
+  const out=document.getElementById('output1');
+  out.innerHTML='<span class="out-line">&gt; Initialising constants...</span>';
+  initStars(); let frame=0;
+  const oc=runCount%5===0?outcomes[3]:outcomes[Math.floor(Math.random()*3)+(runCount%3===2?2:0)];
+  if(animId)cancelAnimationFrame(animId);
+  function animate(){
+    const w=W(),h=H(); ctx.clearRect(0,0,w,h);
+    stars.forEach(s=>{ s.x+=s.vx*(frame*0.06+0.4); s.y+=s.vy*(frame*0.06+0.4); const a=Math.max(0,1-(frame/72)); ctx.beginPath(); ctx.arc(s.x,s.y,s.r,0,Math.PI*2); ctx.fillStyle=`rgba(220,210,190,${a*0.8})`; ctx.fill(); });
+    frame++;
+    if(frame<75) animId=requestAnimationFrame(animate);
+    else{ running=false; document.getElementById('run-btn1').disabled=false; const cl=oc.t==='success'?'out-success':'out-fail'; out.innerHTML=`<span class="out-line">&gt; Run ${runCount} complete</span><br><span class="${cl}">${oc.m}</span>`; if(runCount%5===4) out.innerHTML+=`<br><span class="out-accent">// Try once more...</span>`; }
+  }
+  animate();
+}
+
+// S2 sliders
+function updateRanges(){
+  const g=+document.getElementById('sl-gravity').value, e=+document.getElementById('sl-expand').value, em=+document.getElementById('sl-em').value;
+  document.getElementById('sv-gravity').textContent=g+'%'; document.getElementById('sv-expand').textContent=e+'%'; document.getElementById('sv-em').textContent=em+'%';
+  const gP=Math.exp(-Math.pow((g-50)/14,2)), eP=Math.exp(-Math.pow((e-50)/14,2)), emP=Math.exp(-Math.pow((em-50)/11,2));
+  const combined=gP*eP*emP;
+  const cs=[{l:'Gravity',p:gP,ok:g>35&&g<65},{l:'Expansion rate',p:eP,ok:e>35&&e<65},{l:'EM coupling',p:emP,ok:em>30&&em<65}];
+  document.getElementById('prob-display').innerHTML=cs.map(c=>`<div style="margin-bottom:9px;"><div style="display:flex;justify-content:space-between;font-family:'Space Mono',monospace;font-size:11px;color:var(--text-muted);margin-bottom:4px;"><span>${c.l}</span><span style="color:${c.ok?'var(--green)':'var(--red)'}">${(c.p*100).toFixed(1)}%</span></div><div class="prob-bar-wrap"><div class="prob-bar-fill" style="width:${c.p*100}%;background:${c.ok?'var(--green)':'var(--red)'}"></div></div></div>`).join('')+`<div style="border-top:1px solid var(--border);padding-top:10px;margin-top:3px;"><div style="display:flex;justify-content:space-between;font-family:'Space Mono',monospace;font-size:11px;margin-bottom:4px;"><span style="color:var(--text-muted)">P(viable universe)</span><span style="color:${combined>0.1?'var(--green)':combined>0.01?'var(--accent)':'var(--red)'}">${(combined*100).toFixed(3)}%</span></div><div class="prob-bar-wrap" style="height:8px;"><div class="prob-bar-fill" style="width:${combined*100}%;background:${combined>0.1?'var(--green)':combined>0.01?'var(--accent)':'var(--red)'}"></div></div><div style="font-family:'Crimson Pro',serif;font-style:italic;font-size:0.86rem;color:var(--text-dim);margin-top:7px;">${combined>0.15?'Broadly hospitable. Life is on the table.':combined>0.03?'Marginal — viable universe possible but unlikely.':'Near-zero — almost no run produces stable structure.'}</div></div>`;
+}
+updateRanges();
+
+// S3 range vis
+const c3=[{n:'gravity',s:[0.44,0.56]},{n:'expansion',s:[0.42,0.56]},{n:'em_alpha',s:[0.44,0.58]},{n:'dark_energy',s:[0.47,0.53]}];
+function updateRangeVis(){
+  const v=+document.getElementById('sl-range').value;
+  const lbl=v<12?'Very narrow':v<30?'Narrow':v<55?'Moderate':v<78?'Wide':'Very wide';
+  document.getElementById('sv-range').textContent=lbl;
+  const rW=v/100, st=Math.max(0,0.5-rW/2), en=Math.min(1,0.5+rW/2);
+  const rows=c3.map(c=>{ const o=Math.max(0,Math.min(c.s[1],en)-Math.max(c.s[0],st)); const d=en-st; return{c,st,en,p:d>0?o/d:0}; });
+  document.getElementById('range-vis').innerHTML=rows.map(({c,st,en,p})=>`<div class="range-row"><div class="range-name">${c.n}</div><div class="range-track"><div class="range-fill" style="left:${st*100}%;width:${(en-st)*100}%"></div><div class="range-safe" style="left:${c.s[0]*100}%;width:${(c.s[1]-c.s[0])*100}%"></div></div><span style="font-family:'Space Mono',monospace;font-size:10px;min-width:32px;text-align:right;color:${p>0.5?'var(--green)':'var(--red)'};">${(p*100).toFixed(0)}%</span></div>`).join('');
+  const ov=rows.reduce((a,{p})=>a*p,1);
+  document.getElementById('range-analysis').innerHTML=`<span style="color:var(--text-muted)">P(all constants viable)</span>  <span style="color:${ov>0.1?'var(--green)':ov>0.01?'var(--accent)':'var(--red)'}">${(ov*100).toFixed(3)}%</span>\n`+(v<12?`<span style="color:var(--text-dim)">// Narrow range may accidentally hit life-permitting window</span>`:v>70?`<span style="color:var(--text-dim)">// Wide range makes life-permitting window a negligible sliver</span>`:`<span style="color:var(--text-dim)">// Some constants viable — others fall outside the window</span>`);
+}
+updateRangeVis();
+
+// S6 chain
+function litNode(i){ document.querySelectorAll('.chain-node').forEach((n,j)=>{ n.classList.remove('lit'); if(j<=i) n.classList.add('lit'); }); }
+
+// S8 fork
+const forkNotes={a:'This path is consistent with the principle of sufficient reason — the foundation of all causal reasoning. It requires accepting a necessary cause: something outside the causal chain of the universe whose existence is self-explanatory. Science cannot confirm or deny it, because the question lies outside its domain.',b:'This path accepts that some things exist with no explanation — brute facts. It is formally consistent, but it requires suspending the principle of sufficient reason at the deepest level. Crucially, this is not the conclusion of an argument. It is the refusal to follow one to its terminus.'};
+function chooseFork(w){ document.getElementById('fork-a').classList.remove('chosen'); document.getElementById('fork-b').classList.remove('chosen'); document.getElementById('fork-'+w).classList.add('chosen'); const n=document.getElementById('fork-note'); n.textContent=forkNotes[w]; n.style.opacity='1'; }
+
+// PSR interactive
+function updatePSRSlider(){
+  const v=+document.getElementById('psr-slider').value;
+  const labels=['Events in nature have causes','Patterns in data are explainable','The universe itself has a cause','The laws of physics have a cause','Every fact at any level has a sufficient reason'];
+  const desc=['Local science — no physicist disputes this','The backbone of empirical method','Where weak PSR stops; strong PSR presses on','Strong PSR territory — science silent here','Full strong PSR: reality is completely intelligible'];
+  const cols=['var(--green)','var(--green)','var(--accent)','var(--accent)','var(--blue)'];
+  document.getElementById('psr-label').textContent=labels[v];
+  document.getElementById('psr-desc').textContent=desc[v];
+  document.getElementById('psr-bar').style.background=cols[v];
+  document.getElementById('psr-zone').textContent=v<2?'Weak PSR':v===2?'The Boundary':v>2?'Strong PSR':'';
+  document.getElementById('psr-zone').style.color=v<2?'var(--green)':v===2?'var(--accent)':'var(--blue)';
+}
+
+// Intelligibility chain
+function litIG(i){
+  document.querySelectorAll('.ig-node').forEach((n,j)=>{ n.classList.remove('lit'); if(j<=i) n.classList.add('lit'); });
+}
+
+// Step stepper for flow
+let stepIdx=0;
+const steps=[
+  {t:'We explain everything we encounter',b:'This is the weak PSR in practice — science assumes events have explanations, causes, patterns.',c:'var(--green)'},
+  {t:'The universe is also something we encounter',b:'It is a fact: the universe exists, has laws, has a specific structure. We encounter it as surely as we encounter any event.',c:'var(--accent)'},
+  {t:'Exempting it from explanation is arbitrary',b:'All other facts require explanation. But this one special fact — "the whole" — is exempt? On what principle?',c:'var(--accent)'},
+  {t:'Brute facts halt explanation at will',b:'If we allow brute facts at the foundation, nothing stops us from allowing them anywhere. Explanation becomes a habit, not a necessity.',c:'var(--red)'},
+  {t:'Rational inquiry resists arbitrary stopping points',b:'The very act of explaining things presupposes that facts are not arbitrary. Accepting a brute fact uses explanation while denying its universality.',c:'var(--accent)'},
+  {t:'Therefore: explanation must be universal',b:'Not just local. Not just internal. If reason is a genuine commitment, it cannot stop at the boundary of the universe.',c:'var(--blue)'},
+  {t:'Universal explanation requires sufficiency',b:'Probabilistic or partial explanations can pass between contingent facts. But to explain existence itself, the explanation must be complete — non-derivative.',c:'var(--blue)'},
+  {t:'Strong PSR',b:'Every fact, including the existence and structure of reality itself, has a sufficient reason that fully accounts for why it is so and not otherwise.',c:'var(--accent)'},
+];
+function updateStep(dir){
+  stepIdx=Math.max(0,Math.min(steps.length-1,stepIdx+dir));
+  const s=steps[stepIdx];
+  document.getElementById('step-num').textContent=(stepIdx+1)+' / '+steps.length;
+  document.getElementById('step-title').textContent=s.t;
+  document.getElementById('step-body').textContent=s.b;
+  document.getElementById('step-bar').style.width=((stepIdx+1)/steps.length*100)+'%';
+  document.getElementById('step-bar').style.background=s.c;
+  document.getElementById('step-prev').disabled=stepIdx===0;
+  document.getElementById('step-next').disabled=stepIdx===steps.length-1;
+}
+document.addEventListener('DOMContentLoaded',()=>{ if(document.getElementById('step-title')) updateStep(0); });
+</script>
+</body>
+</html>
