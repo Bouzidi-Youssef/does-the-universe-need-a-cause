@@ -1,0 +1,67 @@
+---
+import '../styles/recap.css';
+import RecapStepper from './islands/RecapStepper.tsx';
+---
+<section id="recap" role="dialog" aria-modal="true" aria-label="Recap — What Has Been Established">
+  <RecapStepper client:visible />
+</section>
+
+<script>
+  const overlay = document.getElementById('recap');
+  const sentinel = document.getElementById('recap-sentinel');
+  let seen = false;
+
+  function openRecap() {
+    if (!overlay) return;
+    overlay.classList.add('open');
+    overlay.scrollTop = 0;
+    document.body.classList.add('recap-open');
+  }
+
+  function closeRecap(targetId: string) {
+    overlay?.classList.remove('open');
+    document.body.classList.remove('recap-open');
+    document.getElementById(targetId)?.scrollIntoView({ behavior: 'smooth' });
+  }
+
+  // Finish the recap → lock it as seen, reveal Chapter III
+  window.addEventListener('recap:complete', () => {
+    seen = true;
+    closeRecap('s16');
+  });
+
+  // Exit early → don't auto-reopen; user can replay from Chapter III
+  window.addEventListener('recap:back', () => {
+    seen = true;
+    closeRecap('s15');
+  });
+
+  window.addEventListener('recap:reopen', () => openRecap());
+
+  // Replay buttons anywhere on the page (e.g. end of Chapter III)
+  document.addEventListener('click', (e) => {
+    if ((e.target as HTMLElement).closest('[data-replay-recap]')) {
+      openRecap();
+    }
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && overlay?.classList.contains('open')) {
+      seen = true;
+      closeRecap('s15');
+    }
+  });
+
+  // Scrolling past the end of Chapter II summons the fullscreen recap
+  if (sentinel && overlay) {
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !seen) openRecap();
+        });
+      },
+      { threshold: 0.15 },
+    );
+    io.observe(sentinel);
+  }
+</script>

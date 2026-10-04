@@ -1,0 +1,41 @@
+---
+id: s6
+num: "06 / 09"
+title: "The Question Is Not “Before” in Time"
+navLabel: "Causality"
+chapter: existence
+order: 6
+rightLabel: "The objections and their limits"
+rightCards:
+  - header: "The temporal objection"
+    bodyHtml: "\"There is no before.\" — True in physical time. But the question is about ontological grounding, not temporal precedence. Removing the temporal edge does not remove the need for a cause."
+  - header: "The quantum objection"
+    bodyHtml: "\"Particles appear from nothing.\" — The quantum vacuum is not nothing. It has energy, laws, and structure. Calling it \"nothing\" is a language error that sounds like a physical one."
+  - header: "Hawking's no-boundary model"
+    bodyHtml: "Removes the temporal edge. Does not remove the ontological question. A circle has no beginning, but it still requires an explanation for why it exists at all."
+---
+
+import Panel from '../../components/Panel.astro';
+import Chain from '../../components/islands/Chain.tsx';
+
+<div class="prose">
+  <p>Here is the most common evasion of the argument, and why it fails. The objection goes: causality depends on time. If time itself began at the singularity, asking what happened "before" is like asking what is north of the North Pole — the question is ill-formed, a category error.</p>
+  <p class="q-lead">Isn't that fair? If time began at t = 0, there is literally no "before" in which a cause could operate.</p>
+  <p>The objection attacks the language, not the substance. The question being asked is not "what happened before the Big Bang in physical time." It is: why does the universe exist at all? This is a question about ontological dependence — what explains the universe's existence — not about temporal precedence. Even if time began with the Big Bang, the coming-into-existence of the universe still demands explanation, because something coming from absolute nothing without any cause contradicts the very principle of reason. Removing the temporal edge doesn't remove the need for a cause. It only changes the form of the question without answering it.</p>
+  <p class="q-lead">But in physics, things can come from "nothing" — quantum particles appear from the vacuum all the time. Doesn't this show something can arise without a cause?</p>
+  <p>This conflates two very different senses of "nothing." The quantum vacuum is not nothing. It is a physical entity with structure, laws, and energy — it is very much something. Spontaneous particle creation in the vacuum is not creation from nothing; it is a process that occurs within an already-existing physical framework, governed by pre-existing laws. Calling it emergence from "nothing" is a language trick, not a physical fact. The question of what brought the quantum vacuum into existence, and what established the laws it obeys, is the original question — pushed back one step, but not answered.</p>
+  <p>Click through the causality chain below to trace how every attempted answer defers rather than resolves.</p>
+</div>
+
+<div class="interactive">
+  <Panel title="The regress — click each node to trace">
+    <Chain client:visible items={[
+      { icon: '⬡', html: '<b>Quantum vacuum</b> — particles appear spontaneously. “Something from nothing?”' },
+      { icon: '⬡', html: '<b>No.</b> The vacuum has energy, laws, structure. It is something. <em>Who brought the vacuum into existence?</em>' },
+      { icon: '⬡', html: '<b>A prior field or geometry</b> — maybe the vacuum emerged from something more fundamental.' },
+      { icon: '⬡', html: '<b>Same problem.</b> That prior state also has structure and laws. <em>What brought that into existence?</em>' },
+      { icon: '⬡', html: '<b>The multiverse</b> — an ensemble of states, laws, and fields, generating universes endlessly.' },
+      { icon: '?', html: '<b>Same question.</b> The multiverse exists and operates by laws. Wherever the chain terminates, something exists without explanation — or we accept a brute fact and call it a terminus.', question: true },
+    ]} />
+  </Panel>
+</div>

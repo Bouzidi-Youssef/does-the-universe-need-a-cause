@@ -1,0 +1,39 @@
+---
+id: s22
+num: "22 / 26"
+title: "Not Inspiration — <em>Communication</em>"
+navLabel: "Communication"
+chapter: revelation
+order: 22
+rightLabel: "Why a miracle, specifically"
+rightCards:
+  - variant: default
+    header: "The evidentiary gap"
+    bodyHtml: "A claim needs evidence outside ordinary human capacity — otherwise anyone's claim would carry equal weight."
+  - variant: default
+    header: "Objection: not scientific"
+    bodyHtml: "Science studies regularities. A miracle is presented as a bounded exception, attested the way any historical event is — through mass transmission, not repeatability."
+---
+
+import Panel from '../../components/Panel.astro';
+import ToggleSteps from '../../components/islands/ToggleSteps.tsx';
+
+<div class="prose">
+  <p>Inspiration is internal. It could come from sound reasoning, imagination, intuition, or something less reliable — there is no way, from the inside, to be certain of its source. Revelation is claimed as external: a communication from a specific source, carrying content and authority, requiring both a medium — a messenger — and a message, whether text or transmitted meaning.</p>
+  <p>Because revelation issues commands rather than mere information, an order presupposes the authority of whoever gives it. An unproven claim to speak for God is, on its face, indistinguishable from any other unproven claim. So revelation cannot rest on assertion; it has to meet conditions that separate it from a claim that merely resembles it.</p>
+  <p class="q-lead">Anyone can claim to be a prophet. What actually distinguishes the claim from the real thing?</p>
+  <p>Six conditions, taken together, are what does the separating. No single one is sufficient by itself — a message could satisfy several and still fail on one — but a message that fails any of them has already disqualified itself, regardless of how it fares on the rest.</p>
+</div>
+
+<div class="interactive">
+  <Panel title="Six conditions — click each to expand">
+    <ToggleSteps client:visible steps={[
+      { num: '01', title: 'Internal Consistency', body: 'The message does not contradict itself from one part to another.' },
+      { num: '02', title: 'External Consistency', body: 'It does not contradict what reason has already established about God\u2019s nature.' },
+      { num: '03', title: 'Miracle', body: 'An evidentiary event beyond ordinary human capacity, tied specifically to the messenger.' },
+      { num: '04', title: 'Preservation', body: 'The text has not been altered since it was delivered.' },
+      { num: '05', title: 'Clarity', body: 'The message is intelligible — communication implies clarity, not design to obscure.' },
+      { num: '06', title: 'Completeness', body: 'It covers what it claims to address, without requiring later patchwork.' },
+    ]} />
+  </Panel>
+</div>

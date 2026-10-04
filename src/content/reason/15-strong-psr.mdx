@@ -1,0 +1,39 @@
+---
+id: s15
+num: "15 / 15"
+title: "Where the Demand for Explanation Leads"
+navLabel: "Strong PSR"
+chapter: reason
+order: 15
+rightLabel: "The verdict"
+rightCards:
+  - header: "Weak PSR — epistemically fragile"
+    bodyHtml: "<span style=\"font-family:'Space Mono',monospace;font-size:10px;\">✓ Logically consistent<br/>✓ Science can function<br/>✗ No principled stopping rule<br/>✗ Exempts most important fact<br/>✗ Uses intelligibility to deny it</span>"
+  - header: "Strong PSR — rationally privileged"
+    bodyHtml: "<span style=\"font-family:'Space Mono',monospace;font-size:10px;\">✓ No arbitrary stopping points<br/>✓ Preserves coherence of reason<br/>✓ Applies PSR universally<br/>→ Requires non-contingent cause<br/>→ The journey continues</span>"
+  - header: "What comes next"
+    bodyHtml: "Strong PSR establishes that the universe requires a non-contingent cause. What is the nature of that cause? Is it a force, a law, a mind? That is the next cluster — and it is where “necessary cause” begins its transformation into something more specific."
+---
+
+import Panel from '../../components/Panel.astro';
+import ArgumentStepper from '../../components/islands/ArgumentStepper.tsx';
+
+<div class="prose">
+  <p>The weak form of the principle asks "why?" about everything it encounters — every event, every pattern, every law — and then, at the boundary, stops. Not because a careful argument showed that the universe is exempt. Because the tools run out there. The strong form refuses that stopping point: if explanation is a genuine demand of reason and not merely a tool of physics, it cannot have a ceiling drawn at the edge of what physics can measure. The question is which of these positions can be held consistently.</p>
+  <p class="q-lead">The weak form is still logically consistent. Nothing forces a move to the strong form. Why should the stronger commitment be preferred?</p>
+  <p>Logical consistency is a minimum condition, not a sufficient one. A position can be consistent and still be unable to justify its own practice. The weak form depends on explanation being trustworthy — on the assumption that asking "why?" and reasoning toward an answer is a meaningful activity that tracks reality. But it allows that assumption to rest on nothing at the deepest level. The foundation of the world, on this view, could be a brute accident. And if the foundation could be a brute accident, there is no principled reason why the reliability of logic, the stability of physical laws, or the validity of inference couldn't also be accidents. The weak form borrows the credibility of the demand for reasons to do all of its work, and then refuses to extend that credibility to the one question where it would lead somewhere uncomfortable. That refusal cannot be made into a principle. It is a preference for stopping.</p>
+  <p>The strong form does not require that we can currently explain everything. It requires only that everything has an explanation — that reality is, in principle, intelligible all the way down. This is not an empirical claim. It is a commitment about the structure of reality. And it is a commitment that rational inquiry cannot coherently abandon, because any argument against it must already rely on it.</p>
+  <p class="q-lead">So what follows from the strong form?</p>
+  <p>If every fact has a sufficient reason, then the existence of a contingent universe has a sufficient reason. That reason cannot itself be contingent — a contingent explanation only passes the question one level up, and the regress that results explains nothing, it only defers. The sufficient reason for a contingent universe must be something whose existence is not dependent on anything prior: something that exists necessarily, that could not have failed to exist, that is the non-contingent ground of all contingent things. This is what the previous chapter reached through the causality argument. The strong form of the principle arrives at the same destination through a different route — not by tracing the chain of causes backward, but by pressing the demand for explanation forward until it can rest on something that does not need to be explained by anything further. That something is not a hypothesis. It is what the commitment to explanation requires.</p>
+</div>
+
+<div class="interactive">
+  <Panel title="The full transition — step through the argument">
+    <ArgumentStepper client:visible />
+  </Panel>
+</div>
+
+<div style="max-width:600px;margin-top:38px;padding:22px 26px;border:1px solid var(--accent2);border-radius:6px;background:var(--accent-glow);">
+  <div style="font-family:'Space Grotesk',sans-serif;font-size:9px;letter-spacing:0.25em;text-transform:uppercase;color:var(--accent);margin-bottom:10px;">Where reason arrives</div>
+  <div style="font-family:'Crimson Pro',serif;font-size:1.08rem;color:var(--accent);line-height:1.72;font-style:italic;">The demand for explanation cannot stop at the boundary of the universe without abandoning the very principle that makes explanation trustworthy. Followed without arbitrary stopping points, it arrives at something necessary — a cause whose existence requires no further cause.</div>
+</div>

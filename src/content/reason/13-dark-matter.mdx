@@ -1,0 +1,45 @@
+---
+id: s13
+num: "13 / 15"
+title: "The Method Physicists Use Every Day"
+navLabel: "Dark Matter"
+chapter: reason
+order: 13
+rightLabel: "What this shows"
+rightCards:
+  - header: "Inference is the method"
+    bodyHtml: "Scientists accept dark matter, gravitational waves, black holes, and the Big Bang itself — all inferred from effects, not directly observed. Inference from effect to cause is not speculation. It is the core of rational explanation."
+  - header: "The inconsistency"
+    bodyHtml: "Accepting inference within physics but rejecting it at the origin of physics is not a principled difference. It is a domain preference dressed as a methodological principle. The method is the same. Only the comfort level differs."
+  - header: "Dark matter is necessary"
+    bodyHtml: "Physicists don't say “dark matter is one option among others.” They say “observations don't make sense without it.” Exactly. And the universe's existence doesn't make sense without a non-contingent cause — for the same structural reason."
+---
+
+import Panel from '../../components/Panel.astro';
+
+<div class="prose">
+  <p>Dark matter has never been directly detected. No instrument has captured a dark matter particle. What physicists observe are effects: galaxies rotating at speeds that the visible mass cannot account for, gravitational lensing stronger than it should be, large-scale cosmic structure that would not have formed without something holding it together. From those effects, scientists infer an unseen cause. They do not say "the galaxy rotates that way for no reason." They say "there must be something we have not yet found." The inference is not tentative speculation — it is treated as one of the firmest conclusions in contemporary cosmology.</p>
+  <p class="q-lead">But that is an inference within physics, about a physical entity. Inferring a cause outside the universe is a completely different kind of move.</p>
+  <p>The domain is different. The logical structure of the inference is identical. In both cases, observed facts cannot be made coherent without positing an unobserved cause. In both cases, the cause is inferred from its effects rather than detected directly. In both cases, the inference is driven by the demand that the observations be explicable — that there be a reason for what we see. The only thing that differs is where the cause is located. Dark matter is within the universe, so the inference is called physics. A necessary cause is outside the universe, so the inference is called metaphysics. But that distinction is about domain, not method. And the decision to accept inference in one domain while rejecting it in another is not itself a scientific decision. It is a philosophical one.</p>
+  <p>Physicists do not say dark matter is one hypothesis among many equally plausible options. They say the observations demand it. The same structure applies here: a contingent universe — one that could have been otherwise, or not existed at all — demands a sufficient reason for its existence. That reason cannot itself be contingent, or the same question simply re-opens one level up. The inference to a non-contingent cause follows by the same logic that makes dark matter necessary: the observations don't make sense without it. The discomfort is not with the method. It is with the destination.</p>
+</div>
+
+<div class="interactive">
+  <Panel title="The inference compared">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px;">
+      <div style="border:1px solid rgba(91,141,217,0.3);border-radius:5px;padding:13px;background:var(--blue-dim);">
+        <div style="font-family:'Space Grotesk',sans-serif;font-size:9px;letter-spacing:0.2em;color:var(--blue);margin-bottom:7px;">DARK MATTER</div>
+        <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--text-dim);line-height:1.8;">Observed: galaxy rotation wrong<br />Inferred: unseen mass must exist<br />Status: <span style="color:var(--green)">accepted science</span></div>
+      </div>
+      <div style="border:1px solid rgba(201,166,107,0.3);border-radius:5px;padding:13px;background:var(--accent-glow);">
+        <div style="font-family:'Space Grotesk',sans-serif;font-size:9px;letter-spacing:0.2em;color:var(--accent);margin-bottom:7px;">NECESSARY CAUSE</div>
+        <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--text-dim);line-height:1.8;">Observed: universe exists, contingent<br />Inferred: non-contingent cause<br />Status: <span style="color:var(--accent)">same method, different domain</span></div>
+      </div>
+    </div>
+    <div style="border:1px solid var(--border);border-radius:5px;padding:12px;background:var(--surface2);">
+      <div style="font-family:'Space Grotesk',sans-serif;font-size:9px;letter-spacing:0.2em;color:var(--text-dim);margin-bottom:7px;">THE LOGICAL STRUCTURE (IDENTICAL)</div>
+      <div style="font-family:'Space Mono',monospace;font-size:11px;color:var(--text-muted);line-height:1.8;">visible effects don't make sense<br />→ unseen cause must exist<br />→ cause inferred from necessity of explanation</div>
+    </div>
+    <div style="margin-top:10px;font-family:'Crimson Pro',serif;font-style:italic;font-size:0.9rem;color:var(--text-muted);line-height:1.6;">The difference is not the method. It is the domain. And the decision about which domains get the benefit of rational inference is not scientific — it is philosophical.</div>
+  </Panel>
+</div>

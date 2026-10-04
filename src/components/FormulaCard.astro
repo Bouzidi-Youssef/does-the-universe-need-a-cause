@@ -1,0 +1,26 @@
+---
+interface Row {
+  sym: string;
+  desc: string;
+}
+
+interface Props {
+  equation: string;
+  rows: Row[];
+}
+
+const { equation, rows } = Astro.props;
+---
+<div class="formula-card">
+  <div class="formula-eq">{equation}</div>
+  <div style="border-top:1px solid var(--border);padding-top:12px;margin-top:4px;">
+    {
+      rows.map((r) => (
+        <div class="formula-row">
+          <span class="formula-sym">{r.sym}</span>
+          <span class="formula-desc">{r.desc}</span>
+        </div>
+      ))
+    }
+  </div>
+</div>

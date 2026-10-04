@@ -1,0 +1,33 @@
+---
+id: s8
+num: "08 / 09"
+title: "The Fork in the Road"
+navLabel: "The Fork"
+chapter: existence
+order: 8
+rightLabel: "What each path demands"
+rightCards:
+  - header: "Path A demands"
+    bodyHtml: "Accepting a necessary cause outside the causal chain. Science neither confirms nor denies it. Logic, however, leads there when the principle of sufficient reason is applied consistently."
+  - header: "Path B demands"
+    bodyHtml: "Accepting that the deepest question has been declared off-limits — not answered. The principle of sufficient reason is not proven false. It is abandoned at the very point it matters most."
+  - header: "Common ground"
+    bodyHtml: "Neither is a scientific stance. Both are philosophical commitments. The question is not which science supports — it is which is more consistent with the logic that makes rational thought possible."
+---
+
+import Panel from '../../components/Panel.astro';
+import ForkChoice from '../../components/islands/ForkChoice.tsx';
+
+<div class="prose">
+  <p>The inquiry arrives at a genuine fork. Neither path is ruled out by science — this is expected, because science cannot speak to what lies outside its own domain. But the two paths are not equally positioned when evaluated by logic alone.</p>
+  <p>One path follows the principle of sufficient reason to its conclusion. Every contingent thing — every thing that might not have existed, or might have been different — requires an explanation in something prior. The chain cannot regress infinitely through contingent causes; an infinite regress of contingent explanations does not produce an explanation, it merely defers one forever. Therefore something exists that is not contingent: something whose existence is not dependent on anything prior, something that cannot fail to exist. This is what philosophers call the necessary being. The argument doesn't specify its nature — only that it must exist, and that it must be sufficient to explain all contingent existence.</p>
+  <p class="q-lead">But why can't the laws of physics themselves just be a brute fact — existing without explanation? Why must there be something beyond them?</p>
+  <p>They can be — and that is the second path. It is logically coherent in the sense that it produces no immediate contradiction. But it pays a price: the most fundamental question — why is there something rather than nothing? — is declared unanswerable. Not because we haven't found the answer, but because there is nothing to find. Rationality is not reaching a terminus here. It is being withdrawn. The principle of sufficient reason, which underlies all causal reasoning and all science, is suspended precisely where it matters most.</p>
+  <p>Both are philosophical commitments. The difference is what each does with the demand for explanation: one honours it to its terminus; the other withdraws it.</p>
+</div>
+
+<div class="interactive">
+  <Panel title="Two paths — select one to examine">
+    <ForkChoice client:visible />
+  </Panel>
+</div>

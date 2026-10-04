@@ -1,0 +1,24 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import SectionEntry from '../components/SectionEntry.astro';
+import Recap from '../components/Recap.astro';
+import { getCollection } from 'astro:content';
+
+const byOrder = (a, b) => a.data.order - b.data.order;
+const existence = (await getCollection('existence')).sort(byOrder);
+const reason = (await getCollection('reason')).sort(byOrder);
+const god = (await getCollection('god')).sort(byOrder);
+const revelation = (await getCollection('revelation')).sort(byOrder);
+const religions = (await getCollection('religions')).sort(byOrder);
+---
+<BaseLayout>
+  <Hero />
+  {existence.map((entry) => <SectionEntry entry={entry} />)}
+  {reason.map((entry) => <SectionEntry entry={entry} />)}
+  <div id="recap-sentinel" aria-hidden="true" style="height:2px;"></div>
+  <Recap />
+  {god.map((entry) => <SectionEntry entry={entry} />)}
+  {revelation.map((entry) => <SectionEntry entry={entry} />)}
+  {religions.map((entry) => <SectionEntry entry={entry} />)}
+</BaseLayout>

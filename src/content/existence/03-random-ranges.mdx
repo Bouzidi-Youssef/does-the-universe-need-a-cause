@@ -1,0 +1,48 @@
+---
+id: s3
+num: "03 / 09"
+title: "Randomising the Randomness Itself"
+navLabel: "Random Ranges"
+chapter: existence
+order: 3
+rightLabel: "How the model evolved"
+rightCards:
+  - variant: evo
+    steps:
+      - num: "1"
+        title: "Fixed constants"
+        body: "All constants hardcoded. Every run is eligible."
+        formula: "P(life) = P(life | fixed)"
+      - num: "2"
+        title: "Random constants, fixed ranges"
+        body: "Constants drawn from ranges we chose. Most combinations produce dead universes."
+        formula: "P(life) = P(viable) × P(life | viable)"
+      - num: "3"
+        title: "Random constants, random ranges"
+        body: "Even boundaries are random. Wide ranges dominate, shrinking the life-permitting slice."
+        formula: "P(life) = P(good range) × P(viable | range) × P(life | viable)"
+      - num: "✦"
+        title: "The measure problem"
+        body: "At every layer, a distribution must be specified. “Truly random” is not a neutral choice — it is itself a choice about what values are likely."
+  - variant: default
+    header: "Key insight"
+    bodyHtml: "Adding layers of randomness does not avoid fine-tuning. It relocates it. Each layer introduces a new hidden assumption. The problem simply moves one level up."
+---
+
+import Panel from '../../components/Panel.astro';
+import RangeVis from '../../components/islands/RangeVis.tsx';
+
+<div class="prose">
+  <p>Go one layer deeper. Until now, we chose the boundaries of our random ranges — we decided that gravity would fall somewhere from 0 to some maximum. But who chose those boundaries? Now make the boundaries themselves random. We don't know if a constant ranges from 0 to 1, or 0 to a billion. The scale of each range is itself unknown and unspecified.</p>
+  <p class="q-lead">Doesn't this make things more neutral — removing our hidden bias about what's "reasonable"?</p>
+  <p>It seems that way. But it actually makes things worse. When boundary selection is truly unconstrained, large ranges tend to dominate the available space — a random process unconstrained in scale will, more often than not, produce enormous ranges. And when the range is enormous and the life-permitting window is narrow and fixed, the probability of landing in the window becomes negligible. The move toward apparent neutrality reduces the probability further still.</p>
+  <p class="q-lead">Can't we keep adding layers of randomness until the model is truly unbiased?</p>
+  <p>No — and this exposes a structural problem. No matter how many layers of randomness are stacked, a probability distribution must be specified at every level. The question "how many runs until life?" only has meaning if you define, at each level, how values are distributed. This is the measure problem in cosmology. Every claim about the likelihood of a universe secretly contains an assumption about what distribution governs the process — and that assumption is never neutral. The appearance of impartiality always hides a choice.</p>
+  <p>Drag the range width below and watch the life-permitting window shrink relative to the sampled space.</p>
+</div>
+
+<div class="interactive">
+  <Panel title="Range width vs. life-permitting window">
+    <RangeVis client:visible />
+  </Panel>
+</div>

@@ -1,0 +1,21 @@
+---
+import { chapters } from '../data/navigation.ts';
+---
+<nav id="sidebar">
+  <span class="sidebar-title" id="sidebar-title">{chapters[0].title}</span>
+  <div class="chapter-badge" id="chapter-badge">{chapters[0].badge}</div>
+  <div class="nav-chapters">
+    {
+      chapters.map((ch, ci) => (
+        <div class:list={['nav-track', { hidden: ci !== 0 }]} id={`nav-track-${ci + 1}`} data-chapter={ci}>
+          {ch.sections.map((s) => (
+            <div class="nav-dot" data-target={s.id} role="button" tabindex="0" aria-label={s.label}>
+              <div class="nav-dot-inner"></div>
+              <div class="nav-tooltip">{s.label}</div>
+            </div>
+          ))}
+        </div>
+      ))
+    }
+  </div>
+</nav>

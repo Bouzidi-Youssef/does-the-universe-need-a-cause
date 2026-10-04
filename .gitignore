@@ -1,0 +1,12 @@
+# ---> Astro
+# build output
+dist/
+.astro/
+# dependencies
+node_modules/
+# logs
+*.log
+# OS
+.DS_Store
+# legacy monolith (kept for visual-parity reference, not deployed)
+# index.html is the original file; Astro builds from src/pages instead.

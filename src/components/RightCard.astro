@@ -1,0 +1,13 @@
+---
+interface Props {
+  header: string;
+}
+
+const { header } = Astro.props;
+---
+<div class="rcard">
+  <div class="rcard-header">{header}</div>
+  <div class="rcard-body">
+    <slot />
+  </div>
+</div>

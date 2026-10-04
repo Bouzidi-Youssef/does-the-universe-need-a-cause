@@ -1,0 +1,47 @@
+---
+id: s27
+num: "27 / 35"
+title: "A Method, <em>Not a Prejudice</em>"
+navLabel: "The Method"
+chapter: religions
+order: 27
+rightLabel: "Objections and their limits"
+rightCards:
+  - variant: default
+    header: "The circularity objection"
+    bodyHtml: "The criteria come from Chapter III's attributes, not from any tradition — and they're applied to every tradition, including the one this inquiry favors."
+  - variant: default
+    header: "Why five, not more or fewer?"
+    bodyHtml: "Each is necessary to what revelation is for. A new criterion would need its own derivation from reason, not from a tradition's convenience."
+  - variant: default
+    header: "Why not test empirically?"
+    bodyHtml: "Private experience isn't publicly checkable. Text, transmission, and history are — that's what the five criteria examine."
+---
+
+import Panel from '../../components/Panel.astro';
+import ToggleSteps from '../../components/islands/ToggleSteps.tsx';
+
+<div class="prose">
+  <p>Chapter IV closed with six conditions a genuine revelation must satisfy: internal consistency, external consistency, miracle, preservation, clarity, and completeness. Applied to actual traditions, three of these collapse naturally into a single doctrinal check, leaving five practical criteria to run each candidate through:</p>
+  <p><b style="color:#e0dbd2;">Pure monotheism</b> — a single, transcendent, personal creator, with no partner, no incarnation, no indwelling. <b style="color:#e0dbd2;">Consistency with reason</b> — no contradiction, internal or against what was already established about God's nature. <b style="color:#e0dbd2;">Preservation</b> — an unbroken, attested chain from the text's origin to today. <b style="color:#e0dbd2;">Completeness</b> — coverage of what a final message would need to address, without later patchwork. <b style="color:#e0dbd2;">Miracle</b> — evidence beyond ordinary human capacity, tied to the one making the claim.</p>
+  <p>None of these five is invented for the occasion. Each unpacks an attribute the earlier chapters already argued for. Monotheism follows from the necessary being's unity. Consistency follows from its wisdom. Preservation and completeness follow from the same wisdom applied to the act of sending a message at all — a wise sender does not deliver something and let it be corrupted, or leave out what the message was for. Miracle follows from the simple fact that a claim requires evidence, or it is indistinguishable from any other claim.</p>
+  <p>The method itself is mechanical, almost deliberately so: take a tradition, apply the five criteria in turn, and if it fails any single one, set it aside — regardless of how well it performs on the rest. A tradition does not get partial credit for meeting four of five. The criteria are conjunctive, because a wise, one, honest God is either fully consistent with a message or the message is not fully His.</p>
+  <p class="q-lead">Isn't this circular — don't you already know where you want to land, and grade everything else down to get there?</p>
+  <p>The method starts from the criteria, and the criteria were derived in the previous chapter from what reason had already established about God's nature — not from any one tradition's self-description. Objectivity here means exactly one thing: the same five criteria apply to every tradition examined, without exception. If the tradition this inquiry eventually favors failed even one of them, it would be set aside on the same grounds as any other. That test is applied to it too, later in this chapter.</p>
+  <p class="q-lead">Why five criteria, and not ten — or two?</p>
+  <p>Each of the five is necessary to what a genuine revelation is for: a trustworthy message from a single wise God. Drop any one and something a genuine revelation would need goes unchecked. Add an unrelated sixth, and it would need its own derivation from reason — asserting a new criterion because one particular tradition happens to satisfy it is the very move this method is built to rule out.</p>
+  <p class="q-lead">Why not test religions empirically, the way a scientist tests a hypothesis?</p>
+  <p>Religions are not repeatable lab phenomena, and a private religious experience is not something a third party can check — which is exactly why it cannot serve as a public criterion. The five criteria are objective in a different, available sense: each is checked against public evidence — a text, a transmission record, a historical claim — that anyone can examine, rather than against something only available from the inside.</p>
+</div>
+
+<div class="interactive">
+  <Panel title="The five criteria — click each">
+    <ToggleSteps client:visible steps={[
+      { num: '01', title: 'Pure Monotheism', body: 'One transcendent, personal creator. No partner, no incarnation, no indwelling.', formula: 'grounded in: God\u2019s established unity' },
+      { num: '02', title: 'Consistency with Reason', body: 'No internal contradiction; no contradiction with what reason already established.', formula: 'grounded in: God\u2019s established wisdom' },
+      { num: '03', title: 'Preservation', body: 'An unbroken, attested chain from origin to the present text.', formula: 'grounded in: a wise sender does not let a message corrupt' },
+      { num: '04', title: 'Completeness', body: 'Covers what a final message needs to, without later patchwork.', formula: 'grounded in: a wise sender does not send half a message' },
+      { num: '05', title: 'Miracle', body: 'Evidence beyond ordinary human capacity, tied to the messenger.', formula: 'grounded in: a claim requires evidence' },
+    ]} />
+  </Panel>
+</div>

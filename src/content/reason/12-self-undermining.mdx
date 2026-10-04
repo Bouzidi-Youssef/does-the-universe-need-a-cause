@@ -1,0 +1,40 @@
+---
+id: s12
+num: "12 / 15"
+title: "A Principle That Cannot Justify Its Own Stopping Point"
+navLabel: "Self-Undermining"
+chapter: reason
+order: 12
+rightLabel: "The asymmetry problem"
+rightCards:
+  - header: "Weak PSR's implicit claim"
+    bodyHtml: "<span style=\"font-family:'Space Mono',monospace;font-size:10px;\">Inside reality:<br/>→ explanation required<br/><br/>At the foundation:<br/>→ explanation optional<br/><br/><span style=\"color:var(--red)\">Why does explanation apply in one domain but not the other?</span></span>"
+  - header: "The boundary problem"
+    bodyHtml: "If the boundary between “needs explanation” and “doesn't need explanation” is itself unexplained, then the weak PSR applies brute facts to its own rule. The exemption has no justification — which is itself a kind of brute fact."
+  - header: "What strong PSR stabilises"
+    bodyHtml: "Strong PSR says explanation is not a local tool — it is fundamental. No arbitrary stopping points. No unexplained foundations. This preserves the coherence of the demand for reasons that makes science possible in the first place."
+---
+
+import Panel from '../../components/Panel.astro';
+import Chain from '../../components/islands/Chain.tsx';
+
+<div class="prose">
+  <p>Here is a question the weak form of the principle cannot answer: on what basis do we distinguish between facts that require explanation and facts that don't? There must be a rule. Otherwise the distinction is arbitrary — and if it is arbitrary, then there is no reason why the stopping point couldn't be drawn somewhere else entirely. Why not declare the laws of thermodynamics a brute fact, and stop explaining heat? Why not declare the outcome of any particular experiment a brute fact, and stop doing physics? The weak form offers no principled answer. Its only implied rule is: stop at the universe. But that is a location, not a criterion.</p>
+  <p class="q-lead">The criterion is simple — we stop where the tools of science stop. Beyond the singularity, physics cannot reach. That is where explanation ends.</p>
+  <p>That conflates two different boundaries. Physics stops at the singularity because its equations become undefined there — because the mathematical framework breaks down, not because the question of explanation becomes meaningless. "Why does the universe exist?" was never a question within physics. It is structurally prior to physics: physics already assumes the existence of the universe, its laws, and its mathematical structure in order to get started at all. The question cannot be answered from inside the system it is asking about. Saying "physics can't answer this, so there is no answer" is like saying a ruler cannot measure the length of the ruler itself, therefore the ruler has no length.</p>
+  <p>Now consider what it means to allow brute facts at the foundation. The weak form depends on explanation being a trustworthy activity — on the assumption that when we ask "why?" and reason toward an answer, the answer tracks something real about the world. But if the foundation of the world is allowed to be fundamentally inexplicable, what guarantees that the structure of logic isn't also a brute accident? That the reliability of inference isn't arbitrary? The weak form uses the practice of reason to do science, while allowing that practice to rest on nothing at the deepest level. It borrows the credibility of explanation and then refuses to extend that credibility to the one case where it matters most.</p>
+  <p class="q-lead">But science works. If the foundation were truly arbitrary, surely science would fail — and it doesn't.</p>
+  <p>Science working is not evidence that the foundation is non-arbitrary. It is evidence that, locally, within the universe, patterns hold. Whether those patterns are grounded in something necessary, or are themselves a cosmic accident that happens to be stable, is exactly the question the weak form declines to ask. Science cannot settle its own foundations by pointing to its own success. That would be circular. The question of whether the ground under science is solid is not a scientific question. It is prior to science — and declining to ask it is not the same as answering it.</p>
+</div>
+
+<div class="interactive">
+  <Panel title="The self-undermining structure of weak PSR">
+    <Chain client:visible items={[
+      { icon: '1', html: '<b>Weak PSR presupposes</b> that facts are, in general, explainable — that explanation is a meaningful activity.' },
+      { icon: '2', html: '<b>But weak PSR allows</b> brute facts at the foundation — the laws of physics, the universe’s existence — could be completely inexplicable.' },
+      { icon: '3', html: '<b>If the foundation is brute,</b> why trust that the structure of logic or the reliability of reasoning is not also brute? What guarantees local intelligibility?' },
+      { icon: '4', html: '<b>Weak PSR provides no boundary rule.</b> It cannot specify, on principle, which facts get explanations and which don’t. The only rule is: stop at the universe. That is not a principle — it is a location.' },
+      { icon: '↯', html: '<b>Therefore:</b> weak PSR uses explanation while denying its ultimate necessity. It is epistemically fragile — not contradictory, but unable to fully justify its own practice.', question: true },
+    ]} />
+  </Panel>
+</div>

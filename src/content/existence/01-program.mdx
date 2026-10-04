@@ -1,0 +1,49 @@
+---
+id: s1
+num: "01 / 09"
+title: "The Universe as a C++ Program"
+navLabel: "The Program"
+chapter: existence
+order: 1
+rightLabel: "Three positions — all defensible"
+rightCards:
+  - variant: hypo
+    accent: green
+    label: "Position A"
+    title: "High probability of life"
+    body: "Chemistry, planetary conditions, and deep time make life nearly inevitable wherever the basics are in place."
+    note: "Fewer runs needed. Life appears in many runs, perhaps most."
+  - variant: hypo
+    accent: gold
+    label: "Position B"
+    title: "Low probability of life"
+    body: "The jump from chemistry to self-replicating life may be extraordinarily rare. The Fermi Paradox — the silence of space — supports this."
+    note: "Many runs needed. Life is rare; complex life rarer still."
+  - variant: hypo
+    accent: red
+    label: "Position C"
+    title: "Earth-like life is vanishingly rare"
+    body: "Stable star, habitable zone, magnetic field, plate tectonics, right evolutionary accidents — each factor multiplies the rarity."
+    note: "Astronomical runs needed. Possibly impossible without pre-selection."
+  - variant: default
+    header: "Scientific status"
+    bodyHtml: "None of these has been ruled out. Science cannot currently distinguish between them. They tell us how many runs we might need — not whether a cause for the constants is required."
+---
+
+import Panel from '../../components/Panel.astro';
+import UniverseSim from '../../components/islands/UniverseSim.tsx';
+
+<div class="prose">
+  <p>Imagine you write a C++ program. Every time you compile and run it, it simulates a full universe from scratch. The Big Bang happens, physics takes over, everything unfolds. Stars ignite, planets cool, billions of years pass in an instant of compute time.</p>
+  <p>Now press Run. Would you get life on the first attempt? Or would you need to press it thousands of times? Millions? The question sounds simple, but it cracks open something very deep about existence.</p>
+  <p>In this first version of the program, the constants are already hardcoded: the speed of light, gravity, electromagnetism — all set to the values we've measured. Each run plays by identical rules but with different random initial conditions. The only variable is the seeding of the primordial plasma.</p>
+  <p class="q-lead">But how often does life actually appear? Surely a universe this vast makes it common?</p>
+  <p>Even with constants locked in, scientists genuinely disagree. Some think life is nearly inevitable — hundreds of billions of galaxies, each with hundreds of billions of stars, and organic molecules form spontaneously in space. Others point to the Fermi Paradox: if life is so easy, why is the observable universe so silent? The three positions to the right are all scientifically defensible. None has been ruled out. They tell us how many runs we'd need — not whether a cause is required.</p>
+  <p>Notice what this first framing already reveals: even when the universe is pre-loaded with life-friendly rules, the emergence of life is not guaranteed. And the deeper question — <em>why those rules are set the way they are</em> — hasn't even been asked yet.</p>
+</div>
+
+<div class="interactive">
+  <Panel title="universe_sim.cpp — hardcoded constants">
+    <UniverseSim client:visible />
+  </Panel>
+</div>

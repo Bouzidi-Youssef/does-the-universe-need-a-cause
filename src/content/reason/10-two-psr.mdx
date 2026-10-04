@@ -1,0 +1,36 @@
+---
+id: s10
+num: "10 / 15"
+title: "Two Ways of Demanding Explanation"
+navLabel: "Two Forms of PSR"
+chapter: reason
+order: 10
+rightLabel: "Side by side"
+rightCards:
+  - header: "Weak PSR"
+    bodyHtml: "Every event or fact <em>within the universe</em> has an explanation — causal, probabilistic, or lawful. Brute facts are acceptable at the foundation. Science can proceed with quantum randomness. The universe itself need not be explained."
+  - header: "Strong PSR"
+    bodyHtml: "Every fact whatsoever — including contingent facts and the existence of the universe itself — has a sufficient reason that fully accounts for it. No brute facts anywhere. Associated with Leibniz, Spinoza, and in the quantum context, Einstein."
+  - header: "Einstein's version"
+    bodyHtml: "<em>\"God does not play dice.\" — Einstein resisted quantum indeterminacy not for aesthetic reasons but because he believed even a quantum event at 3:00 PM has a sufficient reason, even if we haven't found it. He thought quantum mechanics was incomplete, not that nature was brute.</em>"
+  - header: "The hierarchy"
+    bodyHtml: "<span style=\"font-family:'Space Mono',monospace;font-size:10px;\">1. Logical laws — undeniable<br/>2. Weak PSR — presupposed by science<br/>3. Strong PSR — metaphysical commitment<br/><br/><span style=\"color:var(--accent)\">The question: can weak PSR hold its ground without collapsing into strong?</span></span>"
+---
+
+import Panel from '../../components/Panel.astro';
+import PsrSlider from '../../components/islands/PsrSlider.tsx';
+
+<div class="prose">
+  <p>There is a principle so quietly embedded in scientific practice that almost no one names it: every event has an explanation. When a star collapses unexpectedly, we search for the cause. When an experiment produces a strange result, we assume something we haven't accounted for, not that nature acted without reason. This assumption — that facts have explanations — is what makes science possible. Without it, no result of any experiment would be trustworthy, because any outcome could be true for no reason at all. Call it the Principle of Sufficient Reason. In this form it is genuinely undeniable: the moment you deny it, you have already used it to construct the denial.</p>
+  <p>But there are two versions of this principle, and they are not the same. The one science uses is local: every event or fact within the universe has an explanation — causal, probabilistic, or lawful. It does not demand that the explanation be complete, or that the universe itself be explained. It asks "why?" about everything it encounters, and then stops at the boundary. Call this the weak form.</p>
+  <p class="q-lead">That seems enough. Science functions perfectly well with this. Why ask for more?</p>
+  <p>Consider what stopping at the boundary actually means. The weak form applies the demand for explanation to every fact without exception — and then, at the moment it reaches the most fundamental fact of all, it stops. Not because an argument was made showing that this fact is different in kind. Not because a careful analysis revealed that the universe is exempt. It stops because the universe is where physics ends, and physics is the only tool in hand. That is a limit on our instruments. It says nothing about whether an explanation exists.</p>
+  <p>There is a second form of the principle that refuses this stopping point. It says: every fact whatsoever — including the existence and structure of the universe — has a sufficient reason that fully accounts for it. Leibniz held this, and pressed it to its conclusion: if there is something rather than nothing, there must be a reason why — a reason that could not have been otherwise. Einstein expressed the same intuition when he said "God does not play dice with the universe." His resistance to quantum indeterminacy was not aesthetic preference. He could not accept that a uranium atom decays at 3:00 PM for absolutely no reason — not even a hidden one. He thought quantum mechanics must be incomplete. Nature, for Einstein, was not permitted to be brute.</p>
+  <p>Drag the slider below to see exactly where one form ends and the other begins.</p>
+</div>
+
+<div class="interactive">
+  <Panel title="The spectrum of PSR commitment">
+    <PsrSlider client:visible />
+  </Panel>
+</div>

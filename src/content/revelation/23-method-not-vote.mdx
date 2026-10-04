@@ -1,0 +1,39 @@
+---
+id: s23
+num: "23 / 26"
+title: "A Method, <em>Not a Vote</em>"
+navLabel: "A Method"
+chapter: revelation
+order: 23
+rightLabel: "Objections and their limits"
+rightCards:
+  - variant: default
+    header: "Are the criteria arbitrary?"
+    bodyHtml: "No — each is derived from a divine attribute established earlier: unity, wisdom, goodness."
+  - variant: default
+    header: "What if corruption is the plan?"
+    bodyHtml: "A message altered into something else has already failed to arrive. Preservation isn't extra credit; it's a condition of delivery."
+  - variant: default
+    header: "What if obscurity is the test?"
+    bodyHtml: "The test can live in application, not comprehension. Communication, by its nature, implies clarity."
+---
+
+import Panel from '../../components/Panel.astro';
+import CriteriaTester from '../../components/islands/CriteriaTester.tsx';
+
+<div class="prose">
+  <p>Faced with many competing claims, the test can be neither pure reason alone — reason cannot see into God's particular will directly — nor pure transmission alone — any transmitted claim still needs checking. What is workable is the combination already assembled: reason supplies the external-consistency and internal-consistency checks; transmission and evidence supply the rest.</p>
+  <p>Applied, the criteria do real work. A text affirming multiplicity within a single godhead fails external consistency against the unity established earlier. A text permitting an act in one place and forbidding the same act elsewhere, without resolution, fails internal consistency. A text with no attested unbroken chain back to its claimed origin fails preservation, whatever else it gets right — a message that changed content over time can no longer certify that it is what was actually sent. A text that leaves core matters unaddressed fails completeness.</p>
+  <p class="q-lead">Don't these criteria themselves need proof? Where do they come from?</p>
+  <p>They are not arbitrary; they are derived from what the previous chapters already established about God's nature. God is one, so revelation cannot contradict that unity. God is wise, so revelation cannot contradict reason. God is good, so revelation cannot command what is genuinely evil. The criteria are downstream of the argument, not imposed on top of it.</p>
+  <p class="q-lead">Why reject an unpreserved text — what if alteration were part of the plan?</p>
+  <p>A wise sender does not deliver a message and then let it be altered into something else and call that the plan; alteration defeats the point of sending it. Preservation is not an added extra — it is what "the message arrived" means.</p>
+  <p class="q-lead">Why reject vagueness — what if obscurity itself were the test?</p>
+  <p>Communication implies clarity by definition; a test can sit in what is demanded of the reader once the message is understood, without needing the message itself to be unintelligible.</p>
+</div>
+
+<div class="interactive">
+  <Panel title="Test a claimed revelation — toggle each condition">
+    <CriteriaTester client:visible />
+  </Panel>
+</div>

@@ -1,0 +1,48 @@
+---
+id: s21
+num: "21 / 26"
+title: "Why Reason Alone Is <em>Not Enough</em>"
+navLabel: "Limits of Reason"
+chapter: revelation
+order: 21
+rightLabel: "Objections and their limits"
+rightCards:
+  - variant: default
+    header: "The moral-knowledge objection"
+    bodyHtml: "Universals, yes — particulars, no. Knowing God exists is not knowing what God has commanded."
+  - variant: default
+    header: "The circularity objection"
+    bodyHtml: "Needing a message and needing to verify it are two separate questions. Neither cancels the other."
+  - variant: default
+    header: "The direct-revelation objection"
+    bodyHtml: "Certainty for everyone removes the test. A transmitted message preserves both unity and freedom."
+---
+
+import Panel from '../../components/Panel.astro';
+import Chain from '../../components/islands/Chain.tsx';
+
+<div class="prose">
+  <p>Chapter III established that the necessary being is personal — it knows, deliberates, and acts. A person who acts intentionally has, in principle, something to say. But establishing that such a being exists is not the same as knowing what it wants. This chapter asks what closes that gap, and whether anything can.</p>
+  <p>Reason reaches universals about God — that God is good, wise, just, one. It does not reach the particulars of a free will. How God should be worshipped, what pleases God, when a person is held to account: these depend on what God has actually chosen, not on what is logically necessary. A free choice could have gone otherwise by definition. No amount of reasoning about God's nature tells you which way it went — only disclosure does.</p>
+  <p>Human reason is also bound by the frame it works in: sense experience and inference from what is observed. The being reason has already pointed to stands outside space and time altogether. A bounded intellect cannot map an unbounded reality by extrapolation alone — not unless the unbounded reality discloses itself first.</p>
+  <p>There is a further, empirical argument. If unaided reason were sufficient here, the same faculty applied to the same evidence should eventually converge. Instead, human history shows not mere variation but flatly contradictory accounts of the divine, persisting across centuries and civilisations. That kind of structured, durable disagreement is not a minor embarrassment for the "reason is enough" position — it is closer to what you would expect to find if reason keeps arriving at the edge of what it can settle alone.</p>
+  <p>Finally, even where reason succeeds, it only persuades. People routinely know an action is wrong and do it regardless; a valid argument moves the intellect, not necessarily the will. Revelation, by contrast, claims authority — it does not propose, it commands. If what is needed is not only information but a binding obligation, reason alone was never going to supply the second half.</p>
+  <p class="q-lead">Isn't reason enough on its own? We recognise right from wrong without needing to be told.</p>
+  <p>Reason does grasp the broad moral universals reliably — that justice is good, cruelty bad. It struggles precisely at the point of application, where reasonable people diverge on whether this act, here, counts as one or the other. And even granting that God's existence is established by argument, that alone tells you nothing about what is wanted from you specifically. You can know that a lawgiver exists without knowing a single one of the laws — those you only know once they are issued.</p>
+  <p class="q-lead">Doesn't revelation just replace one uncertainty with another — since any claim to it must itself be proven?</p>
+  <p>It does, and that is exactly the subject of the next two sections. The need for a message is not cancelled by the fact that any specific claim to deliver one must be tested. Two separate questions are in play: whether a message is needed at all, and which claimed messages, if any, pass scrutiny.</p>
+  <p class="q-lead">If God wanted to communicate, why not reveal directly to every person, rather than through intermediaries?</p>
+  <p>Direct, unmistakable revelation to everyone would remove the very possibility of a meaningful test — certainty imposed would erase the freedom the argument already required God to preserve. A single transmitted message also holds together as one, where private and unverifiable experience for each person could not; and a human messenger lets God address humans in a form humans can actually receive.</p>
+</div>
+
+<div class="interactive">
+  <Panel title="The limits of reason — click each node">
+    <Chain client:visible items={[
+      { icon: '◇', html: '<b>Reason reaches universals</b> — that God is good, wise, just, one.' },
+      { icon: '◇', html: '<b>Not particulars.</b> How to worship, what pleases God, when one is judged — these depend on a free will, not a necessary truth.' },
+      { icon: '◇', html: '<b>Reason is bound</b> by space and time. The being it points to is not.' },
+      { icon: '◇', html: '<b>Persistent disagreement</b> across cultures and centuries is data — the pattern expected where unaided reason cannot close the question alone.' },
+      { icon: '?', html: '<b>Reason only persuades.</b> If binding obligation is needed, not just information, reason alone cannot supply it.', question: true },
+    ]} />
+  </Panel>
+</div>

@@ -1,0 +1,48 @@
+---
+id: s30
+num: "30 / 35"
+title: "Two Natures, <em>One Problem</em>"
+navLabel: "Trinity & Incarnation"
+chapter: religions
+order: 30
+rightLabel: "Objections and their limits"
+rightCards:
+  - variant: default
+    header: "Chalcedon's own answer"
+    bodyHtml: "Hypostatic union names the difficulty precisely — but relocating “who bears the property” doesn't dissolve the identity-law tension, it restates it."
+  - variant: default
+    header: "“One being, many attributes”?"
+    bodyHtml: "A weaker claim than Trinity's three distinct persons who address one another. The disanalogy is exactly what generates the objection."
+  - variant: default
+    header: "The cost of consistency"
+    bodyHtml: "Keeping the doctrine coherent means saying, strictly, the divine nature didn't die — which leaves work to do to keep “God died for us” meaningful."
+---
+
+import Panel from '../../components/Panel.astro';
+import NaturePairs from '../../components/islands/NaturePairs.tsx';
+
+<div class="prose">
+  <p>Christianity clears the first hurdle only in name. It affirms one God — but defines that God as three persons, Father, Son, and Holy Spirit, each held fully and equally God, together said to constitute a single being. Whatever grammar was developed to hold this together, it strains the same unity criterion that ruled out Hinduism's one-reality-many-gods a section ago; the shape of the tension is the same, even where the vocabulary built around it is more developed.</p>
+  <p>The sharper problem is the incarnation specifically, and it can be put as a plain application of the identity law this project has used since its opening chapters: a thing cannot hold two mutually exclusive natures and be fully identical to only one of them, in the same respect, at the same time. A nature is what makes a thing what it is. To have a human nature — to be born, to hunger, to sleep, to suffer, to die — is to actually possess the properties that make something human. If the same single subject also possesses a fully divine nature — uncaused, omniscient, omnipotent, immutable — those properties either genuinely belong to one unified subject who is now both, or they don't. There is no third option under the law of identity.</p>
+  <p>Historic Christian orthodoxy's own answer, formulated exactly to meet this difficulty, is the doctrine of the hypostatic union: one person, two complete and unmingled natures, each keeping its own properties without either cancelling the other — "without confusion, without change, without division, without separation," in the language the Council of Chalcedon settled on in 451 AD. On that account the properties aren't blended into some third kind of thing: the human nature is legitimately ignorant of the day, hungry, and mortal; the divine nature remains omniscient, unchanging, and eternal — both true of the one person at once, because a single person can be described by the properties of either nature without those properties transferring to the other.</p>
+  <p>The identity-law objection doesn't disappear just because the tradition names the difficulty and gives it a technical answer. If a single person genuinely has two natures with directly opposite properties predicated of him "without confusion" at the same time, the objection is relabeled rather than resolved: either the properties belong to the person — in which case the person is genuinely ignorant, mortal, and limited, which is not what "fully God" was supposed to secure — or they belong only to an abstracted "nature," in which case it becomes unclear what work is left for saying the person, rather than merely one of his two natures, is God. Naming the union a mystery honestly reports the difficulty. It is not the same thing as resolving it.</p>
+  <p>Three concrete places where the tradition's own text is read, on this framework, as evidence rather than mere mystery: the Torah has God's own spokesman declare that God is not a man who changes his mind or fails to keep his word (Numbers 23:19) — historically read as excluding exactly the kind of becoming and limitation incarnation requires. The Gospels have Jesus say, of his own return, that not even the Son knows the day or the hour, only the Father (Mark 13:32) — a first-person disavowal of omniscience, inside the very text that also calls him Son of God. And the crucifixion narrates an actual death. A necessary being, as Chapter III argued it, cannot cease to exist or undergo the kind of change death involves; if only the human nature died, the identity question from the paragraph above returns immediately — something died, and if it wasn't God, "God died for humanity's sins" is, at minimum, imprecise about what did the dying.</p>
+  <p>None of this asserts that Christian belief is insincere or unreasoned. It's a structural claim: the same law of identity this project has used throughout — that a necessary being cannot also be contingent, that a cause cannot also be its own effect — applies here too, and the doctrine that best explains the New Testament's own descriptions of Jesus's limits (hypostatic union) is exactly the kind of move criterion two, consistency with what reason already established about God's nature, was built to catch.</p>
+  <p class="q-lead">But hypostatic union and kenosis were developed for exactly this question — isn't it unfair to treat them as if they'd never considered it?</p>
+  <p>They weren't invented to dodge the question; they were built specifically to answer it, and deserve to be engaged as a genuine, sophisticated answer rather than a strawman. The reply above does that: the doctrine relocates the question — which subject bears the property? — without dissolving the original tension. And "mystery" is doing different work here than it does elsewhere in this project. Earlier, an appeal to necessity closed a chain of causes by meeting an independently justified stopping condition — something must not itself require a cause. Here, "mystery" is invoked at the exact point the doctrine's own internal coherence is in question, which is a different kind of appeal, resting on the difficulty rather than resolving it.</p>
+  <p class="q-lead">Isn't "three persons, one being" no stranger than "one being, many attributes" — which every monotheist, including Muslims, affirms about God?</p>
+  <p>There's a real difference worth being precise about. An attribute — knowledge, power, mercy — is a predicate true of a single subject. A person, in the sense Trinitarian doctrine intends, is a distinct centre of consciousness, will, and self-reference — and the historic formulas insist the three are not merely three attributes or three modes, but three real, eternally distinct persons who address one another, as when the Son is depicted praying to the Father. That is a stronger claim than "one subject, many attributes," and it's precisely what generates the multiplication concern: three "who"s said to be one "what."</p>
+  <p class="q-lead">If the crucifixion didn't really kill God, doesn't that just confirm what Christian doctrine already says — only the human nature suffered?</p>
+  <p>That is the hypostatic-union answer, and it's consistent on its own terms. It carries a cost the doctrine doesn't always foreground: if the divine nature is genuinely untouched by the death, suffering, and ignorance the Gospels describe, then strictly speaking, on the account just given, God did not become mortal and did not die — which leaves careful theological work still to do to keep saying, meaningfully, that God became man and died for humanity. That isn't a knockdown disproof. It's a cost the position pays to stay internally coherent, and it's weighed differently by different readers.</p>
+</div>
+
+<div class="interactive">
+  <Panel title="One person, two natures — click each pair">
+    <NaturePairs client:visible pairs={[
+      { left: '<b>Divine nature:</b> knows all things, including the hour', right: '<b>Human nature:</b> "not even the Son" knows the hour (Mark 13:32)', note: '✕ predicated of the same one person, at the same time' },
+      { left: '<b>Divine nature:</b> immutable, cannot cease to exist', right: '<b>Human nature:</b> dies on the cross', note: '✕ if only one nature died, what died was not, strictly, God' },
+      { left: '<b>Divine nature:</b> omnipresent, unbound by space', right: '<b>Human nature:</b> located in one body, in first-century Judea', note: '✕ same tension, different property' },
+      { left: '<b>Divine nature:</b> cannot be tempted, cannot suffer', right: '<b>Human nature:</b> hungry, grieved, tempted (per the Gospels)', note: '✕ same tension, different property' },
+    ]} />
+  </Panel>
+</div>

@@ -1,0 +1,25 @@
+---
+---
+<section id="hero">
+  <div class="hero-label">A Philosophical Inquiry</div>
+  <h1>Does the Universe<br />Need <em>a Cause?</em></h1>
+  <p class="hero-sub">
+    On existence, fine-tuning, causality, and the limits of physics. Follow the argument from a C++ program
+    running universes, to the question that physics alone cannot answer.
+  </p>
+  <button
+    class="begin-btn"
+    data-scroll-to="s1"
+  >
+    Begin
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+      <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </button>
+</section>
+
+<script>
+  document.querySelector('[data-scroll-to="s1"]')?.addEventListener('click', () => {
+    document.getElementById('s1')?.scrollIntoView({ behavior: 'smooth' });
+  });
+</script>

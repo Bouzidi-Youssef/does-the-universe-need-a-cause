@@ -1,0 +1,42 @@
+---
+id: s2
+num: "02 / 09"
+title: "What if the Constants Weren't Fixed?"
+navLabel: "Fine-Tuning"
+chapter: existence
+order: 2
+rightLabel: "The compound probability"
+rightCards:
+  - variant: formula
+    equation: "P(life) = P(viable) × P(life | viable)"
+    rows:
+      - sym: "P(life)"
+        desc: "Overall probability that a single run produces life anywhere in the universe."
+      - sym: "P(viable)"
+        desc: "Probability the random constants produce a universe where atoms, stars, and chemistry are possible at all."
+      - sym: "P(life | viable)"
+        desc: "Given a viable universe, the probability life actually emerges from its chemistry."
+  - variant: default
+    header: "Why the first term dominates"
+    bodyHtml: "P(viable) may already be so small — tuned to 1 part in 10¹⁷ by Hawking's figure — that it overwhelms everything else in the product. Even if life is common in the right universe, that doesn't help if the right universe almost never appears."
+  - variant: default
+    header: "Hawking's observation"
+    bodyHtml: "<em>\"If the rate of expansion one second after the Big Bang had been smaller by even one part in a hundred thousand million million, the universe would have collapsed before it ever reached its present size.\"</em>"
+---
+
+import Panel from '../../components/Panel.astro';
+import FineTuningSliders from '../../components/islands/FineTuningSliders.tsx';
+
+<div class="prose">
+  <p>Now change the program. Instead of hardcoding the constants, replace each one with a function that returns a random value within some bounded range. Gravity, the expansion rate, the strength of electromagnetism — all drawn randomly within plausible limits.</p>
+  <p class="q-lead">Surely with reasonable ranges we'd still land near workable values often enough?</p>
+  <p>No — and this is the key surprise. Most combinations of constants don't just fail to produce life. They fail to produce any stable structure at all. If gravity is too strong, the universe collapses within moments — long before stars can form. Too weak, and matter never clumps. Hawking calculated that if the expansion rate one second after the Big Bang had been smaller by even one part in a hundred thousand million million, the universe would have collapsed before reaching its present size.</p>
+  <p>The life-permitting region of this parameter space is not a small island. It is a thread — almost impossibly narrow — running through an enormous landscape of dead configurations. The probability of life is now a product: the chance of landing in a viable universe multiplied by the chance that life then emerges within it. The first factor may already be so small that the second barely matters.</p>
+  <p>Drag the sliders below to see how quickly the combined probability collapses as constants drift from the life-permitting window.</p>
+</div>
+
+<div class="interactive">
+  <Panel title="universe_sim.cpp — randomised bounded constants">
+    <FineTuningSliders client:visible />
+  </Panel>
+</div>

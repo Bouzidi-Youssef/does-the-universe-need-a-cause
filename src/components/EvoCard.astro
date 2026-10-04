@@ -1,0 +1,28 @@
+---
+interface Step {
+  num: string;
+  title: string;
+  body: string;
+  formula?: string;
+}
+
+interface Props {
+  steps: Step[];
+}
+
+const { steps } = Astro.props;
+---
+<div class="evo-card">
+  {
+    steps.map((s) => (
+      <div class="evo-step">
+        <div class="evo-num">{s.num}</div>
+        <div>
+          <div class="evo-title">{s.title}</div>
+          <div class="evo-body">{s.body}</div>
+          {s.formula && <div class="evo-formula">{s.formula}</div>}
+        </div>
+      </div>
+    ))
+  }
+</div>

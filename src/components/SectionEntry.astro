@@ -1,0 +1,50 @@
+---
+import SectionLayout from './SectionLayout.astro';
+import RightCard from './RightCard.astro';
+import HypoCard from './HypoCard.astro';
+import FormulaCard from './FormulaCard.astro';
+import EvoCard from './EvoCard.astro';
+import { render } from 'astro:content';
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+---
+<SectionLayout id={entry.data.id} number={entry.data.num} title={entry.data.title}>
+  <Content />
+  <Fragment slot="aside">
+    {entry.data.replayRecap && (
+      <button class="begin-btn" data-replay-recap style="align-self:flex-start;">
+        Replay the recap
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+    )}
+    {entry.data.rightLabel && <div class="right-label">{entry.data.rightLabel}</div>}
+    {entry.data.rightCards.map((card) => {
+      if (card.variant === 'hypo') {
+        return (
+          <HypoCard
+            accent={card.accent ?? 'gold'}
+            label={card.label ?? ''}
+            title={card.title ?? ''}
+            body={card.body ?? ''}
+            note={card.note}
+          />
+        );
+      }
+      if (card.variant === 'formula') {
+        return <FormulaCard equation={card.equation ?? ''} rows={card.rows ?? []} />;
+      }
+      if (card.variant === 'evo') {
+        return <EvoCard steps={card.steps ?? []} />;
+      }
+      return (
+        <RightCard header={card.header}>
+          <div
+            style="font-family:'Crimson Pro',serif;font-size:0.87rem;color:var(--text-muted);line-height:1.6;"
+            set:html={card.bodyHtml}
+          />
+        </RightCard>
+      );
+    })}
+  </Fragment>
+</SectionLayout>
